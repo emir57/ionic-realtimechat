@@ -13,7 +13,7 @@ export class HomePage {
     private chatService:ChatService
   ) {
     chatService.update("hello world!2")
-    chatService.getChat().subscribe(values=>{
+    chatService.getChats().subscribe(values=>{
       console.log(values)
     })
   }

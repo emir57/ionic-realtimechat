@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 export interface Message{
   id?:string;
@@ -27,7 +27,7 @@ export class ChatService {
     chat.update("-MseYjyfga3SkMvazaeK",messageModel)
   }
 
-  getChat(){
+  getChats():Observable<Message[]>{
     let returnValues:any[]=[];
     let subject = new Subject<any[]>();
     this.db.list("chats").valueChanges().subscribe(values=>{
@@ -35,5 +35,8 @@ export class ChatService {
       subject.next(returnValues)
     })
     return subject.asObservable();
+  }
+  getChat(id:string){
+
   }
 }
