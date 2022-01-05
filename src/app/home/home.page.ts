@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChatService } from '../services/chat.service';
+import { ChatService, Message } from '../services/chat.service';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +8,16 @@ import { ChatService } from '../services/chat.service';
 })
 export class HomePage {
 
+  message:Message
   list:string[]=[]
   constructor(
     private chatService:ChatService
   ) {
-    chatService.update("hello world!2")
+    // this.message.text="denemee";
+    this.message.uid="emir";
+    console.log(this.message)
+    // chatService.add(message)
     chatService.getChats().subscribe(values=>{
-      console.log(values)
     })
   }
 

@@ -16,9 +16,10 @@ export class ChatService {
     private db:AngularFireDatabase
   ) { }
 
-  add(message:string){
+  add(messageModel:Message){
     const chat = this.db.list("chats");
-    let messageModel:Message = Object.assign({text:message,uid:"emir"})
+    messageModel.id = this.createId();
+    console.log(messageModel)
     chat.push(messageModel)
   }
   update(message:string){
@@ -32,11 +33,29 @@ export class ChatService {
     let subject = new Subject<any[]>();
     this.db.list("chats").valueChanges().subscribe(values=>{
       returnValues = values
+      returnValues.forEach(value=>{
+        console.log(value.uid)
+      })
       subject.next(returnValues)
     })
     return subject.asObservable();
   }
-  getChat(id:string){
+  getChat(id:string):Observable<Message>{
+    let getValues:any[]=[];
+    let subject = new Subject<Message>();
+    this.db.list("chats").valueChanges().subscribe(values=>{
+      getValues = values;
+      getValues.forEach(value=>{
+        if(value.id==id){
+          subject.next(value)
+        }
+      })
+    })
+    return subject.asObservable();
+  }
 
+  createId():string{
+    let today = new Date;
+    return today.getTime()+"";
   }
 }
