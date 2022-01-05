@@ -14,13 +14,14 @@ export class HomePage {
   ) {
     let messageModel:Message = Object.assign({uid:"emir",text:"denemee"})
     chatService.add(messageModel)
-    // chatService.getChats().subscribe(values=>{
-    // })
-    chatService.getChat("1641393560576").subscribe(value=>{
-      let date = new Date(value.date)
-      console.log(date)
-      console.log(date.getDate()+" "+date.toLocaleDateString()+" "+date.toLocaleTimeString())
+    chatService.getChats().subscribe(values=>{
+      console.log(values)
     })
+    // chatService.getChat("1641393560576").subscribe(value=>{
+    //   let date = new Date(value.date)
+    //   console.log(date)
+    //   console.log(date.getDate()+" "+date.toLocaleDateString()+" "+date.toLocaleTimeString())
+    // })
   }
 
 }

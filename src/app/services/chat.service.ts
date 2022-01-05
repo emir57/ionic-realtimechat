@@ -18,7 +18,7 @@ export class ChatService {
     messageModel.id = this.createId();
     messageModel.date = this.getNowDate();
     // console.log(messageModel)
-    // chat.push(messageModel)
+    chat.push(messageModel)
   }
   update(message:string){
     const chat = this.db.list("chats");
