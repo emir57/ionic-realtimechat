@@ -13,11 +13,13 @@ export class HomePage {
     private chatService:ChatService
   ) {
     let messageModel:Message = Object.assign({uid:"emir",text:"denemee"})
-    // chatService.add(messageModel)
+    chatService.add(messageModel)
     // chatService.getChats().subscribe(values=>{
     // })
-    chatService.getChat("1641393207596").subscribe(value=>{
-      console.log(value.text)
+    chatService.getChat("1641393560576").subscribe(value=>{
+      let date = new Date(value.date)
+      console.log(date)
+      console.log(date.getDate()+" "+date.toLocaleDateString()+" "+date.toLocaleTimeString())
     })
   }
 

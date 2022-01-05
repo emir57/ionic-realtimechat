@@ -16,8 +16,9 @@ export class ChatService {
   add(messageModel:Message){
     const chat = this.db.list("chats");
     messageModel.id = this.createId();
-    console.log(messageModel)
-    chat.push(messageModel)
+    messageModel.date = this.getNowDate();
+    // console.log(messageModel)
+    // chat.push(messageModel)
   }
   update(message:string){
     const chat = this.db.list("chats");
@@ -51,5 +52,9 @@ export class ChatService {
   createId():string{
     let today = new Date;
     return today.getTime()+"";
+  }
+  getNowDate():string{
+    let today = new Date;
+    return today.toString();
   }
 }
