@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegisterModel } from '../models/registerModel';
+import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +17,7 @@ export class RegisterPage implements OnInit {
   constructor(
     private authService:AuthService,
     private formBuilder:FormBuilder,
+    private messageService:MessageService,
     private router:Router
   ) { }
 
@@ -32,7 +36,12 @@ export class RegisterPage implements OnInit {
   }
 
   register(){
-
+    if(this.registerForm.valid){
+      let user:RegisterModel=Object.assign({},this.registerForm.value);
+      this.authService.register(user).then(()=>{
+        this.messageService.showMessage("Başarıyla Kayıt Olundu");
+      })
+    }
   }
 
   checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => {
