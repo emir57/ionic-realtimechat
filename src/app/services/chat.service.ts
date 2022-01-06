@@ -9,39 +9,34 @@ import { Message } from '../models/message';
 })
 export class ChatService {
 
+  collectionName="chats";
   constructor(
     private db:AngularFireDatabase
   ) { }
 
   add(messageModel:Message){
-    const chat = this.db.list("chats");
+    const chat = this.db.list<Message>(this.collectionName);
     messageModel.id = this.createId();
     messageModel.date = this.getNowDate();
-    // console.log(messageModel)
     chat.push(messageModel)
   }
-  update(message:string){
-    const chat = this.db.list("chats");
-    let messageModel:Message = Object.assign({text:message,uid:"emir"})
-    chat.update("-MseYjyfga3SkMvazaeK",messageModel)
+  update(messageModel:Message){
+    const chat = this.db.list<Message>(this.collectionName);
+    chat.update(messageModel.id,messageModel)
   }
 
   getChats():Observable<Message[]>{
-    let returnValues:any[]=[];
-    let subject = new Subject<any[]>();
-    this.db.list("chats").valueChanges().subscribe(values=>{
-      returnValues = values
-      subject.next(returnValues)
+    let subject = new Subject<Message[]>();
+    this.db.list<Message>(this.collectionName).valueChanges().subscribe(values=>{
+      subject.next(values)
     })
     return subject.asObservable();
   }
   getChat(id:string):Observable<Message>{
-    let getValues:any[]=[];
     let subject = new Subject<Message>();
-    this.db.list("chats").valueChanges().subscribe(values=>{
-      getValues = values;
-      getValues.forEach(value=>{
-        if(value.id==id){
+    this.db.list<Message>(this.collectionName).valueChanges().subscribe(values=>{
+      values.forEach(value=>{
+        if(value.id===id){
           subject.next(value)
         }
       })
