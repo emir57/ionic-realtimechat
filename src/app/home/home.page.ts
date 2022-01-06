@@ -13,7 +13,6 @@ export class HomePage {
     private chatService:ChatService
   ) {
     let messageModel:Message = Object.assign({uid:"emir",text:"denemee"})
-    chatService.add(messageModel)
     chatService.getChats().subscribe(values=>{
       console.log(values)
     })
