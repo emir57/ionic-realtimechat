@@ -46,7 +46,6 @@
     <div *ngIf="(registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched) && registerForm.get('confirmPassword').errors">
       <div *ngIf="registerForm.get('confirmPassword').errors.required">Şifre doğrulama Gerekli</div>
       <div *ngIf="registerForm.get('confirmPassword').errors.minlength">Şifre doğrulama en az 6 karakter olabilir</div>
-
     </div>
     <div *ngIf="registerForm.hasError('notSame')">Şifreler uyuşmuyor</div>
   </form>
