@@ -18,15 +18,14 @@ export class AuthService {
     return this.authService.signInWithEmailAndPassword(loginModel.email,loginModel.password);
   }
   register(registerModel:RegisterModel){
-    this.authService.createUserWithEmailAndPassword(registerModel.email,registerModel.password).then(()=>{
-      this.userService.addUser(registerModel);
+    return this.authService.createUserWithEmailAndPassword(registerModel.email,registerModel.password).then(()=>{
+      this.userService.addUser(registerModel)
     })
-
   }
   signOut(){
-
+    return this.authService.signOut();
   }
-  resetPassword(){
-
+  resetPassword(email:string){
+    return this.authService.sendPasswordResetEmail(email);
   }
 }
