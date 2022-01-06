@@ -1,7 +1,5 @@
-export interface RegisterModel{
-  id?:string;
-  firstName:string;
-  lastName:string;
-  email:string;
+import { User } from "./user";
+
+export interface RegisterModel extends User{
   password:string;
 }

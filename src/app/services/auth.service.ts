@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { LoginModel } from '../models/loginModel';
+import { RegisterModel } from '../models/registerModel';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +10,17 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthService {
 
   constructor(
-    private authService:AngularFireAuth
+    private authService:AngularFireAuth,
+    private userService:UserService
   ) { }
 
-  login(){
-
+  login(loginModel:LoginModel){
+    return this.authService.signInWithEmailAndPassword(loginModel.email,loginModel.password);
   }
-  register(){
+  register(registerModel:RegisterModel){
+    this.authService.createUserWithEmailAndPassword(registerModel.email,registerModel.password).then(()=>{
+      this.userService.addUser(registerModel);
+    })
 
   }
   signOut(){
