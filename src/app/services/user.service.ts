@@ -18,10 +18,10 @@ export class UserService {
     return this.fireStore.collection<User>(this.collectionName).add(user);
   }
   deleteUser(userId:string):Promise<void>{
-    return this.fireStore.collection(this.collectionName).doc(userId).delete();
+    return this.fireStore.collection<User>(this.collectionName).doc(userId).delete();
   }
   updateUser(user:User):Promise<void>{
-    return this.fireStore.collection(this.collectionName).doc(user.id).update(user);
+    return this.fireStore.collection<User>(this.collectionName).doc(user.id).update(user);
   }
   getUser(email:string):Observable<User>{
     let subject = new Subject<User>();
