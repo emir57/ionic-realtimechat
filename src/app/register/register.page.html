@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>Kayıt Ol</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form [formGroup]="registerForm">
+    <ion-item>
+      <ion-label position="floating">Ad</ion-label>
+      <ion-input formControlName="firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Soyad</ion-label>
+      <ion-input formControlName="lastName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">E-posta</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Şifre</ion-label>
+      <ion-input formControlName="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Şifre Doğrulama</ion-label>
+      <ion-input formControlName="confirmPassword"></ion-input>
+    </ion-item>
+  </form>
+  <ion-button [disabled]="!registerForm.valid" (click)="register()" color="primary" shape="round">
+    Kayıt Ol
+  </ion-button>
 </ion-content>

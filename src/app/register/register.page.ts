@@ -18,6 +18,7 @@ export class RegisterPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.createRegisterForm();
   }
 
     createRegisterForm(){
@@ -26,7 +27,7 @@ export class RegisterPage implements OnInit {
         lastName:['',[Validators.required,Validators.maxLength(20)]],
         email:['',[Validators.required,Validators.email,Validators.maxLength(50)]],
         password:['',[Validators.minLength(6),Validators.required]],
-        confirmPassword:['']
+        confirmPassword:['',[Validators.minLength(6),Validators.required]]
       },{validators:this.checkPasswords})
   }
 
