@@ -10,22 +10,45 @@
       <ion-label position="floating">Ad</ion-label>
       <ion-input formControlName="firstName"></ion-input>
     </ion-item>
+    <div *ngIf="(registerForm.get('firstName').dirty || registerForm.get('firstName').touched) && registerForm.get('firstName').errors">
+      <div *ngIf="registerForm.get('firstName').errors.required">Ad Gerekli</div>
+      <div *ngIf="registerForm.get('firstName').errors.maxlength">Ad 20 karakteri geçemez</div>
+    </div>
     <ion-item>
       <ion-label position="floating">Soyad</ion-label>
       <ion-input formControlName="lastName"></ion-input>
     </ion-item>
+    <div *ngIf="(registerForm.get('lastName').dirty || registerForm.get('lastName').touched) && registerForm.get('lastName').errors">
+      <div *ngIf="registerForm.get('lastName').errors.required">Soyad Gerekli</div>
+      <div *ngIf="registerForm.get('lastName').errors.maxlength">Soyad 20 karakteri geçemez</div>
+    </div>
     <ion-item>
-      <ion-label position="floating">E-posta</ion-label>
+      <ion-label position="floating">Eposta</ion-label>
       <ion-input formControlName="email"></ion-input>
     </ion-item>
+    <div *ngIf="(registerForm.get('email').dirty || registerForm.get('email').touched) && registerForm.get('email').errors">
+      <div *ngIf="registerForm.get('email').errors.required">Eposta Gerekli</div>
+      <div *ngIf="registerForm.get('email').errors.maxlength">Eposta 50 karakteri geçemez</div>
+      <div *ngIf="registerForm.get('email').errors.email">Geçersiz eposta</div>
+    </div>
     <ion-item>
       <ion-label position="floating">Şifre</ion-label>
-      <ion-input formControlName="password"></ion-input>
+      <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
+    <div *ngIf="(registerForm.get('password').dirty || registerForm.get('password').touched) && registerForm.get('password').errors">
+      <div *ngIf="registerForm.get('password').errors.required">Şifre Gerekli</div>
+      <div *ngIf="registerForm.get('password').errors.minlength">Şifre en az 6 karakter olabilir</div>
+    </div>
     <ion-item>
       <ion-label position="floating">Şifre Doğrulama</ion-label>
-      <ion-input formControlName="confirmPassword"></ion-input>
+      <ion-input type="password" formControlName="confirmPassword"></ion-input>
     </ion-item>
+    <div *ngIf="(registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched) && registerForm.get('confirmPassword').errors">
+      <div *ngIf="registerForm.get('confirmPassword').errors.required">Şifre doğrulama Gerekli</div>
+      <div *ngIf="registerForm.get('confirmPassword').errors.minlength">Şifre doğrulama en az 6 karakter olabilir</div>
+
+    </div>
+    <div *ngIf="registerForm.hasError('notSame')">Şifreler uyuşmuyor</div>
   </form>
   <ion-button [disabled]="!registerForm.valid" (click)="register()" color="primary" shape="round">
     Kayıt Ol
