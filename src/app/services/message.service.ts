@@ -10,6 +10,11 @@ export class MessageService {
     private toastController:ToastController
   ) { }
 
+  GetErrorMessage(error):string{
+    if(error==="") return "";
+
+    return "";
+  }
 
   async showMessage(message:string,duration=2000) {
     const toast = await this.toastController.create({

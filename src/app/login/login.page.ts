@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  isOk=true;
+  constructor(
+    private formBuilder:FormBuilder,
+    private router:Router,
+    private messageService:MessageService
+  ) { }
 
   ngOnInit() {
   }
