@@ -35,9 +35,13 @@
     </ion-button>
   </div>
   <div id="bottomContainer">
-    <a href="#" (click)="showResetPasswordBox()">Şifremi Unuttum</a>
+    <ion-button (click)="showResetPasswordBox()" fill="clear">
+      Şifremi Unuttum
+    </ion-button>
   </div>
   <div id="bottomContainer">
-    <a routerLink="/register">Hesabım Yok</a>
+    <ion-button routerLink="/register" fill="clear">
+      Hesabım Yok
+    </ion-button>
   </div>
 </ion-content>
