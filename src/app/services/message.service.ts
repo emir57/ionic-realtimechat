@@ -10,8 +10,8 @@ export class MessageService {
     private toastController:ToastController
   ) { }
 
-  GetErrorMessage(error):string{
-    if(error==="") return "";
+  GetErrorMessage(code):string{
+    if(code==="auth/user-not-found") return "Kullanıcı Bulunanamadı.";
 
     return "";
   }

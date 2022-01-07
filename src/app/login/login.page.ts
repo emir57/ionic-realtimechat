@@ -63,7 +63,8 @@ export class LoginPage implements OnInit {
           text: 'Gönder',
           handler: (value) => {
             this.authService.resetPassword(value.email).catch(error=>{
-              console.log(error)
+              let message = this.messageService.GetErrorMessage(error.code)
+              this.messageService.showMessage(message);
             })
           }
         }
