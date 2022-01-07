@@ -9,7 +9,7 @@
     <form [formGroup]="loginForm">
       <ion-item>
         <ion-label position="floating">Eposta</ion-label>
-        <ion-input formControlName="email"></ion-input>
+        <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
       <div class="text-danger"
         *ngIf="(loginForm.get('email').dirty || loginForm.get('email').touched) && loginForm.get('email').errors">

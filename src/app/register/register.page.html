@@ -27,7 +27,7 @@
       </div>
       <ion-item>
         <ion-label position="floating">Eposta</ion-label>
-        <ion-input formControlName="email"></ion-input>
+        <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
       <div class="text-danger"
         *ngIf="(registerForm.get('email').dirty || registerForm.get('email').touched) && registerForm.get('email').errors">
