@@ -13,6 +13,7 @@ import { MessageService } from '../services/message.service';
 })
 export class RegisterPage implements OnInit {
 
+  isOk=true;
   registerForm:FormGroup
   constructor(
     private authService:AuthService,
@@ -37,9 +38,14 @@ export class RegisterPage implements OnInit {
 
   register(){
     if(this.registerForm.valid){
+      this.isOk=false;
       let user:RegisterModel=Object.assign({},this.registerForm.value);
       this.authService.register(user).then(()=>{
-        this.messageService.showMessage("Başarıyla Kayıt Olundu");
+        setTimeout(() => {
+          this.messageService.showMessage("Başarıyla Kayıt Olundu");
+          this.isOk=true;
+          this.router.navigate(["login"])
+        }, 2000);
       })
     }
   }
