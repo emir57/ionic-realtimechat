@@ -31,7 +31,8 @@
   <div id="buttonContainer">
     <ion-button [disabled]="!isOk" [disabled]="!loginForm.valid" (click)="login()" color="primary" shape="round">
       <span *ngIf="!isOk" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      Giriş Yap
+       <span *ngIf="isOk">Giriş Yap</span>
+       <span *ngIf="!isOk">Giriş yapılıyor</span>
     </ion-button>
   </div>
   <div id="bottomContainer">
