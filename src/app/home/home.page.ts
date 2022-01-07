@@ -39,11 +39,12 @@ export class HomePage implements OnInit {
   }
 
   showMenu() {
-    // this.menuController.enable(true,"menu")
+    this.menuController.enable(true,"menu")
     this.menuController.open();
   }
 
   async exit() {
+    this.menuController.close();
     const alert = await this.alertController.create({
       header: 'Çıkış',
       message: 'Çıkış yapmak istediğinizden emin misiniz?',
