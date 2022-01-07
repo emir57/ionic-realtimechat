@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Merhaba <span>{{currentUser.firstName}}</span>
+      <!-- Merhaba <span>{{currentUser.firstName}}</span> -->
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="showMenu()">
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -15,6 +20,31 @@
 
   <div id="container">
     <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer"
+        href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
+
+
 </ion-content>
+<ion-menu side="start" menuId="menu">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>{{currentUser.firstName}} {{currentUser.lastName}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>Menu Item</ion-item>
+      <ion-item>Menu Item</ion-item>
+      <ion-item>Menu Item</ion-item>
+      <ion-item>Menu Item</ion-item>
+      <ion-item>
+        <ion-button (click)="exit()" fill="clear" shape="round" color="danger">
+          <ion-icon name="exit-outline"></ion-icon>
+          &nbsp; Çıkış Yap
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet main></ion-router-outlet>

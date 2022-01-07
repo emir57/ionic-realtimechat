@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController, PopoverController } from '@ionic/angular';
+import { LoginPage } from '../login/login.page';
 import { Message } from '../models/message';
 import { User } from '../models/user';
 import { ChatService } from '../services/chat.service';
@@ -12,7 +14,8 @@ export class HomePage implements OnInit{
   list:string[]=[]
   currentUser:User
   constructor(
-    private chatService:ChatService
+    private chatService:ChatService,
+    private menuController:MenuController
   ) {
     let messageModel:Message = Object.assign({uid:"emir",text:"denemee"})
     chatService.getChats().subscribe(values=>{
@@ -28,4 +31,8 @@ export class HomePage implements OnInit{
     this.currentUser = JSON.parse(localStorage.getItem("user"));
   }
 
+  showMenu(){
+    // this.menuController.enable(true,"menu")
+    this.menuController.open();
+  }
 }
