@@ -67,6 +67,7 @@ export class LoginPage implements OnInit {
         {
           name: 'email',
           type: 'email',
+          value:this.loginForm.get("email").value,
           placeholder: 'email@example.com'
         },
       ],
