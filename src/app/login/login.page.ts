@@ -39,12 +39,15 @@ export class LoginPage implements OnInit {
       this.isOk=false;
       let loginModel: LoginModel = this.loginForm.value;
       this.authService.login(loginModel).then((msg)=>{
-        console.log(msg)
+        this.messageService.showMessage("Giriş Başarılı");
+        this.router.navigate(["home"])
       }).catch(error=>{
         let message = this.messageService.GetErrorMessage(error.code);
         this.messageService.showMessage(message);
       }).finally(()=>{
-
+        setTimeout(() => {
+          this.isOk=true;
+        }, 1000);
       })
     }
   }
