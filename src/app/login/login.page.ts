@@ -36,8 +36,16 @@ export class LoginPage implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
+      this.isOk=false;
       let loginModel: LoginModel = this.loginForm.value;
+      this.authService.login(loginModel).then((msg)=>{
+        console.log(msg)
+      }).catch(error=>{
+        let message = this.messageService.GetErrorMessage(error.code);
+        this.messageService.showMessage(message);
+      }).finally(()=>{
 
+      })
     }
   }
 
