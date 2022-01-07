@@ -58,8 +58,10 @@
     </form>
   </div>
   <div id="buttonContainer">
-    <ion-button [disabled]="!registerForm.valid" (click)="register()" color="primary" shape="round">
-      Kayıt Ol
+    <ion-button [disabled]="!isOk" [disabled]="!registerForm.valid" (click)="register()" color="primary" shape="round">
+      <span *ngIf="!isOk" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      &nbsp; <span *ngIf="isOk">Kayıt Ol</span>
+      &nbsp; <span *ngIf="!isOk">Kayıt Olunuyor</span>
     </ion-button>
   </div>
   <div id="bottomContainer">
