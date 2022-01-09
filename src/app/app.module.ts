@@ -16,9 +16,7 @@ import { SearchFriendRequestPipe } from './pipes/search-friend-request.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SearchFriendPipe,
-    SearchFriendRequestPipe
+    AppComponent
   ],
   entryComponents: [],
   imports: [
