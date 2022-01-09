@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
 export class FriendsPage implements OnInit {
   @Input() currentUserEmail:string;
 
-  friendModel:FriendModel[]=[];
+  friends:FriendModel[]=[];
   constructor(
     private modalController:ModalController,
     private friendService:FriendService,
@@ -23,7 +23,7 @@ export class FriendsPage implements OnInit {
     this.friendService.getFriends(this.currentUserEmail).subscribe(friends=>{
       friends.forEach(friend=>{
         this.userService.getUser(friend.friendUserEmail).subscribe(user=>{
-          this.friendModel.push(Object.assign({user:user},friend));
+          this.friends.push(Object.assign({user:user},friend));
         })
       })
     })
