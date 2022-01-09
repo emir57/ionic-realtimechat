@@ -55,15 +55,15 @@ export class FriendsRequestPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  accept(user: User) {
+  accept(request: FriendRequestModel) {
     this.friendModel = Object.assign({
       currentUserEmail: this.currentUserEmail,
-      friendUserEmail: user.email
+      friendUserEmail: request.user.email
     })
     this.friendService.add(this.friendModel).then(() => {
       this.modalController.dismiss();
-      this.messageService.showMessage(`${user.firstName} ${user.lastName} başarıyla eklendi`);
-
+      this.messageService.showMessage(`${request.user.firstName} ${request.user.lastName} başarıyla eklendi`);
+      this.friendRequestService.delete(request).then();
     })
   }
   decline(request: FriendRequestModel) {
