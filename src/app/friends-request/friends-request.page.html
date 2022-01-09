@@ -10,5 +10,22 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-item *ngFor="let user of users">
+    <ion-avatar slot="start">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+    </ion-avatar>
+    <ion-label slot="">
+      {{user.firstName}} {{user.lastName}}
+    </ion-label>
+    <ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="accept()">
+          <ion-icon name="person-add-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="decline()">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-label>
+  </ion-item>
 </ion-content>
