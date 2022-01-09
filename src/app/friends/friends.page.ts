@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FriendModel } from '../models/friendModel';
 import { FriendService } from '../services/friend.service';
+import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class FriendsPage implements OnInit {
   constructor(
     private modalController:ModalController,
     private friendService:FriendService,
-    private userService:UserService
+    private userService:UserService,
+    private messageService:MessageService
   ) { }
 
   ngOnInit() {
@@ -32,5 +34,13 @@ export class FriendsPage implements OnInit {
 
   close(){
     this.modalController.dismiss();
+  }
+
+  remove(friend:FriendModel){
+    // this.friendService.delete(friend).then(()=>{
+    //   this.messageService.showMessage(`${friend.user.firstName} ${friend.user.lastName} başarıyla arkadaşlıktan çıakrtıldı`);
+
+    // })
+    
   }
 }
