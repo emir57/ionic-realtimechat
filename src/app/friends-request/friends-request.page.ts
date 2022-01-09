@@ -68,6 +68,7 @@ export class FriendsRequestPage implements OnInit {
   }
   decline(request: FriendRequestModel) {
     this.friendRequestService.delete(request).then(() => {
+      this.modalController.dismiss();
       this.messageService.showMessage(`${request.user.firstName} ${request.user.lastName} başarıyla reddedildi`)
     })
   }
