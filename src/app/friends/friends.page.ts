@@ -41,6 +41,7 @@ export class FriendsPage implements OnInit {
     //   this.messageService.showMessage(`${friend.user.firstName} ${friend.user.lastName} başarıyla arkadaşlıktan çıakrtıldı`);
 
     // })
-    
+    let index = this.friends.findIndex(x=>x.id===friend.id)
+    this.friends.splice(index,1);
   }
 }
