@@ -15,4 +15,7 @@ export class FriendService {
   add(friendModel:FriendModel){
     return this.fireStoreService.collection(this.collectionName).add(friendModel);
   }
+  delete(friendModel:FriendModel){
+    return this.fireStoreService.collection(this.collectionName).doc(friendModel.id).delete();
+  }
 }
