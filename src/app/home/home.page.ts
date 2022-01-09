@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, MenuController, ModalController, PopoverController } from '@ionic/angular';
 import { FriendsRequestPage } from '../friends-request/friends-request.page';
+import { FriendsPage } from '../friends/friends.page';
 import { LoginPage } from '../login/login.page';
 import { Message } from '../models/message';
 import { User } from '../models/user';
@@ -87,6 +88,10 @@ export class HomePage implements OnInit {
   }
   async showFriends() {
     this.menuController.close("menu")
-
+    const modal = await this.modalController.create({
+      component:FriendsPage,
+      componentProps:{currentUserId:this.currentUser.id}
+    })
+    return await modal.present();
   }
 }

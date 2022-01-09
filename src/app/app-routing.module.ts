@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'friends-request',
     loadChildren: () => import('./friends-request/friends-request.module').then( m => m.FriendsRequestPageModule)
   },
+  {
+    path: 'friends',
+    loadChildren: () => import('./friends/friends.module').then( m => m.FriendsPageModule)
+  },
 
 ];
 
