@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { FriendService } from '../services/friend.service';
 
 @Component({
   selector: 'app-friends',
@@ -8,7 +10,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FriendsPage implements OnInit {
   @Input() currentUserEmail:string;
 
-  constructor() { }
+  constructor(
+    private modalController:ModalController,
+    private friendService:FriendService
+  ) { }
 
   ngOnInit() {
 
@@ -16,6 +21,6 @@ export class FriendsPage implements OnInit {
 
 
   close(){
-
+    this.modalController.dismiss();
   }
 }
