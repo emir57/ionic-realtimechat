@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, MenuController, PopoverController } from '@ionic/angular';
+import { AlertController, MenuController, ModalController, PopoverController } from '@ionic/angular';
+import { FriendsRequestPage } from '../friends-request/friends-request.page';
 import { LoginPage } from '../login/login.page';
 import { Message } from '../models/message';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
 import { MessageService } from '../services/message.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +17,15 @@ import { MessageService } from '../services/message.service';
 })
 export class HomePage implements OnInit {
   list: string[] = []
-  currentUser: User
+  currentUser: User;
   constructor(
     private chatService: ChatService,
     private menuController: MenuController,
-    private alertController:AlertController,
-    private authService:AuthService,
-    private router:Router,
-    private messageService:MessageService
+    private alertController: AlertController,
+    private authService: AuthService,
+    private router: Router,
+    private messageService: MessageService,
+    private modalController:ModalController
   ) {
     let messageModel: Message = Object.assign({ uid: "emir", text: "denemee" })
     chatService.getChats().subscribe(values => {
@@ -34,7 +37,7 @@ export class HomePage implements OnInit {
   }
 
   showMenu() {
-    this.menuController.enable(true,"menu")
+    this.menuController.enable(true, "menu")
     this.menuController.open();
   }
 
@@ -54,7 +57,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Çık',
           handler: () => {
-            this.authService.signOut().then(()=>{
+            this.authService.signOut().then(() => {
               this.router.navigate(["login"])
               this.messageService.showMessage("Başarıyla çıkış yapıldı");
             })
@@ -65,14 +68,20 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  async showProfile(){
+  async showProfile() {
     this.menuController.close("menu")
+
   }
 
-  async showFriendsRequest(){
+  async showFriendsRequest() {
     this.menuController.close("menu")
+    const modal = await this.modalController.create({
+      component:FriendsRequestPage
+    })
+    return await modal.present();
   }
-  async showFriends(){
+  async showFriends() {
     this.menuController.close("menu")
+
   }
 }
