@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { FriendModel } from '../models/friendModel';
 import { FriendRequestModel } from '../models/friendRequestModel';
 import { User } from '../models/user';
@@ -14,29 +14,29 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./friends-request.page.scss'],
 })
 export class FriendsRequestPage implements OnInit {
-  @Input() currentUserEmail:string;
+  @Input() currentUserEmail: string;
 
-  friendRequestModel:FriendRequestModel;
-  friendRequests:FriendRequestModel[]=[];
-  users:User[]=[];
-  friendModel:FriendModel;
+  friendRequestModel: FriendRequestModel;
+  friendRequests: FriendRequestModel[] = [];
+  users: User[] = [];
+  friendModel: FriendModel;
   constructor(
-    private modalController:ModalController,
-    private friendRequestService:FriendRequestService,
-    private userService:UserService,
-    private friendService:FriendService,
-    private messageService:MessageService
+    private modalController: ModalController,
+    private friendRequestService: FriendRequestService,
+    private userService: UserService,
+    private friendService: FriendService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
     // this.friendRequestService.getRequestsByUser(this.currentUserEmail).subscribe(users=>{
     //   this.users = users
     // })
-    this.friendRequestService.getRequests(this.currentUserEmail).subscribe(requests=>{
-      requests.forEach(request=>{
-        this.userService.getUser(request.senderUserEmail).subscribe(user=>{
+    this.friendRequestService.getRequests(this.currentUserEmail).subscribe(requests => {
+      requests.forEach(request => {
+        this.userService.getUser(request.senderUserEmail).subscribe(user => {
           this.users.push(user);
-          this.friendRequests.push(Object.assign({user:user},request))
+          this.friendRequests.push(Object.assign({ user: user }, request))
         })
         console.log(this.friendRequests)
       })
@@ -51,22 +51,24 @@ export class FriendsRequestPage implements OnInit {
     // this.friendRequestService.add(this.friendRequestModel).then(()=>{});
   }
 
-  close(){
+  close() {
     this.modalController.dismiss();
   }
 
-  accept(user:User){
+  accept(user: User) {
     this.friendModel = Object.assign({
-      currentUserEmail:this.currentUserEmail,
-      friendUserEmail:user.email
+      currentUserEmail: this.currentUserEmail,
+      friendUserEmail: user.email
     })
-    this.friendService.add(this.friendModel).then(()=>{
-      this.messageService.showMessage(`${user.firstName} ${user.lastName} başarıyla eklendi`);
+    this.friendService.add(this.friendModel).then(() => {
       this.modalController.dismiss();
+      this.messageService.showMessage(`${user.firstName} ${user.lastName} başarıyla eklendi`);
+
     })
   }
-  decline(user:User){
-
+  decline(request: FriendRequestModel) {
+    this.friendRequestService.delete(request).then(() => {
+      this.messageService.showMessage(`${request.user.firstName} ${request.user.lastName} başarıyla reddedildi`)
+    })
   }
-
 }
