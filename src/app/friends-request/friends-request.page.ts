@@ -16,6 +16,7 @@ import { UserService } from '../services/user.service';
 export class FriendsRequestPage implements OnInit {
   @Input() currentUserEmail: string;
 
+  searchString:string="";
   friendRequestModel: FriendRequestModel;
   friendRequests: FriendRequestModel[] = [];
   users: User[] = [];

@@ -13,6 +13,7 @@ import { UserService } from '../services/user.service';
 export class FriendsPage implements OnInit {
   @Input() currentUserEmail: string;
 
+  searchString:string="";
   friends: FriendModel[] = [];
   constructor(
     private modalController: ModalController,
