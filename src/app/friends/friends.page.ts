@@ -11,6 +11,11 @@ export class FriendsPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
+
+  close(){
+
+  }
 }
