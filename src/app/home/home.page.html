@@ -22,8 +22,24 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item>Menu Item</ion-item>
-      <ion-item>Menu Item</ion-item>
+      <ion-item>
+        <ion-button (click)="showProfile()" fill="clear" shape="round">
+          <ion-icon name="person-outline"></ion-icon>
+          &nbsp;Profilim
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button (click)="showFriendsRequest()" fill="clear" shape="round">
+          <ion-icon name="people-outline"></ion-icon>
+          &nbsp;Arkadaşlık İsteklerim
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button (click)="showFriends()" fill="clear" shape="round">
+          <ion-icon name="people-outline"></ion-icon>
+          &nbsp;Arkadaşlarım
+        </ion-button>
+      </ion-item>
       <ion-item>Menu Item</ion-item>
       <ion-item>Menu Item</ion-item>
       <ion-item>
