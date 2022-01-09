@@ -9,7 +9,7 @@ import { User } from '../models/user';
 export class UserService {
 
 
-  collectionName="users";
+  private collectionName="users";
   constructor(
     private fireStore:AngularFirestore
   ) { }
