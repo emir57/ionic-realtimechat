@@ -76,7 +76,8 @@ export class HomePage implements OnInit {
   async showFriendsRequest() {
     this.menuController.close("menu")
     const modal = await this.modalController.create({
-      component:FriendsRequestPage
+      component:FriendsRequestPage,
+      componentProps:{currentUserId:this.currentUser.id}
     })
     return await modal.present();
   }
