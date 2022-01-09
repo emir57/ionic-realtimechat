@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-friends-request',
@@ -8,10 +9,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FriendsRequestPage implements OnInit {
   @Input() currentUserEmail:string;
 
-  constructor() { }
+  constructor(
+    private modalController:ModalController
+  ) { }
 
   ngOnInit() {
     console.log(this.currentUserEmail)
+  }
+
+  close(){
+    this.modalController.dismiss();
   }
 
 }
