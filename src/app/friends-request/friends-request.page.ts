@@ -22,12 +22,8 @@ export class FriendsRequestPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.friendRequestService.getRequests(this.currentUserEmail).subscribe(requests=>{
-      requests.forEach(request=>{
-        this.userService.getUser(request.receiveUserEmail).subscribe(user=>{
-          this.users.push(user);
-        })
-      })
+    this.friendRequestService.getRequests(this.currentUserEmail).subscribe(users=>{
+      this.users = users
     })
     // this.friendRequestModel = Object.assign({
     //   senderUserEmail:this.currentUserEmail,
