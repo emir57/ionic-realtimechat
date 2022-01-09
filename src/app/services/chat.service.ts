@@ -9,7 +9,7 @@ import { Message } from '../models/message';
 })
 export class ChatService {
 
-  collectionName="chats";
+  private collectionName="chats";
   constructor(
     private db:AngularFireDatabase
   ) { }
