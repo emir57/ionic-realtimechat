@@ -22,18 +22,16 @@ export class FriendService {
   delete(friendModel:FriendModel){
     return this.fireStoreService.collection(this.collectionName).doc(friendModel.id).delete();
   }
-  getFriends(currentUserEmail:string):Observable<User[]>{
-    let subject = new Subject<User[]>();
-    let users:User[]=[]
+  getFriends(currentUserEmail:string):Observable<FriendModel[]>{
+    let subject = new Subject<FriendModel[]>();
+    let returnValues:FriendModel[]=[]
     this.fireStoreService.collection<FriendModel>(this.collectionName).get().subscribe(doc=>{
       doc.docs.forEach(doc=>{
         if(doc.data().currentUserEmail === currentUserEmail){
-          this.userService.getUser(doc.data().friendUserEmail).subscribe(user=>{
-            users.push(user);
-          })
+          returnValues.push(Object.assign({id:doc.id},doc.data()));
         }
       })
-      subject.next(users);
+      subject.next(returnValues);
     })
     return subject.asObservable();
   }
