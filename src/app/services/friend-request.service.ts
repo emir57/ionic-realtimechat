@@ -8,7 +8,7 @@ import { FriendRequestModel } from '../models/friendRequestModel';
 })
 export class FriendRequestService {
 
-  collectionName="friendRequests";
+  private collectionName="friendRequests";
   constructor(
     private fireStoreService:AngularFirestore
   ) { }
