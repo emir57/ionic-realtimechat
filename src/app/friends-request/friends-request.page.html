@@ -10,19 +10,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-item *ngFor="let user of users">
+  <ion-item *ngFor="let request of friendRequests">
     <ion-avatar slot="start">
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
     </ion-avatar>
     <ion-label slot="">
-      {{user.firstName}} {{user.lastName}}
+      {{request.user.firstName}} {{request.user.lastName}}
     </ion-label>
     <ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="accept()">
+        <ion-button (click)="accept(request.user)">
           <ion-icon name="person-add-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="decline()">
+        <ion-button (click)="decline(request.user)">
           <ion-icon name="close-outline"></ion-icon>
         </ion-button>
       </ion-buttons>

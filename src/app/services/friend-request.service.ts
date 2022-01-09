@@ -25,7 +25,7 @@ export class FriendRequestService {
   delete(friendRequestModel:FriendRequestModel){
     return this.fireStoreService.collection(this.collectionName).doc(friendRequestModel.id).delete();
   }
-  getRequests(currentUserEmail:string):Observable<User[]>{
+  getRequestsByUser(currentUserEmail:string):Observable<User[]>{
     let subject = new Subject<User[]>();
     let users:User[] = [];
     this.fireStoreService.collection<FriendRequestModel>(this.collectionName).get().subscribe(requests=>{
@@ -37,6 +37,19 @@ export class FriendRequestService {
         }
       })
       subject.next(users);
+    })
+    return subject.asObservable();
+  }
+  getRequests(currentUserEmail:string):Observable<FriendRequestModel[]>{
+    let subject = new Subject<FriendRequestModel[]>();
+    let returnValues:FriendRequestModel[] = [];
+    this.fireStoreService.collection<FriendRequestModel>(this.collectionName).get().subscribe(requests=>{
+      requests.docs.forEach(request=>{
+        if(request.data().receiveUserEmail===currentUserEmail){
+          returnValues.push(Object.assign({id:request.id},request.data()));
+        }
+      })
+      subject.next(returnValues)
     })
     return subject.asObservable();
   }

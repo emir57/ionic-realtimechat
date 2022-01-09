@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { FriendModel } from '../models/friendModel';
 import { FriendRequestModel } from '../models/friendRequestModel';
 import { User } from '../models/user';
 import { FriendRequestService } from '../services/friend-request.service';
+import { FriendService } from '../services/friend.service';
+import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -14,16 +17,30 @@ export class FriendsRequestPage implements OnInit {
   @Input() currentUserEmail:string;
 
   friendRequestModel:FriendRequestModel;
-  users:User[]=[]
+  friendRequests:FriendRequestModel[]=[];
+  users:User[]=[];
+  friendModel:FriendModel;
   constructor(
     private modalController:ModalController,
     private friendRequestService:FriendRequestService,
-    private userService:UserService
+    private userService:UserService,
+    private friendService:FriendService,
+    private messageService:MessageService
   ) { }
 
   ngOnInit() {
-    this.friendRequestService.getRequests(this.currentUserEmail).subscribe(users=>{
-      this.users = users
+    // this.friendRequestService.getRequestsByUser(this.currentUserEmail).subscribe(users=>{
+    //   this.users = users
+    // })
+    this.friendRequestService.getRequests(this.currentUserEmail).subscribe(requests=>{
+      requests.forEach(request=>{
+        this.userService.getUser(request.senderUserEmail).subscribe(user=>{
+          this.users.push(user);
+          this.friendRequests.push(Object.assign({user:user},request))
+        })
+        console.log(this.friendRequests)
+      })
+
     })
     // this.friendRequestModel = Object.assign({
     //   senderUserEmail:this.currentUserEmail,
@@ -38,10 +55,17 @@ export class FriendsRequestPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  accept(){
-
+  accept(user:User){
+    this.friendModel = Object.assign({
+      currentUserEmail:this.currentUserEmail,
+      friendUserEmail:user.email
+    })
+    this.friendService.add(this.friendModel).then(()=>{
+      this.messageService.showMessage(`${user.firstName} ${user.lastName} başarıyla eklendi`);
+      this.modalController.dismiss();
+    })
   }
-  decline(){
+  decline(user:User){
 
   }
 
