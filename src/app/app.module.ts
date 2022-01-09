@@ -12,11 +12,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { SearchFriendPipe } from './pipes/search-friend.pipe';
+import { SearchFriendRequestPipe } from './pipes/search-friend-request.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchFriendPipe
+    SearchFriendPipe,
+    SearchFriendRequestPipe
   ],
   entryComponents: [],
   imports: [
