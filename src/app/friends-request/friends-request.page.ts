@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-friends-request',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./friends-request.page.scss'],
 })
 export class FriendsRequestPage implements OnInit {
+  @Input() currentUserEmail:string;
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.currentUserEmail)
   }
 
 }
