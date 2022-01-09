@@ -42,4 +42,11 @@ export class FriendsRequestPage implements OnInit {
     this.modalController.dismiss();
   }
 
+  accept(){
+
+  }
+  decline(){
+
+  }
+
 }
