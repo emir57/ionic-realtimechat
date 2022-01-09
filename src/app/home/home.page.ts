@@ -90,7 +90,7 @@ export class HomePage implements OnInit {
     this.menuController.close("menu")
     const modal = await this.modalController.create({
       component:FriendsPage,
-      componentProps:{currentUserId:this.currentUser.id}
+      componentProps:{currentUserEmail:this.currentUser.email}
     })
     return await modal.present();
   }
