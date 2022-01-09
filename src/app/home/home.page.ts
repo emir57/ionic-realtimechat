@@ -28,11 +28,6 @@ export class HomePage implements OnInit {
     chatService.getChats().subscribe(values => {
       console.log(values)
     })
-    // chatService.getChat("1641393560576").subscribe(value=>{
-    //   let date = new Date(value.date)
-    //   console.log(date)
-    //   console.log(date.getDate()+" "+date.toLocaleDateString()+" "+date.toLocaleTimeString())
-    // })
   }
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem("user"));
@@ -68,5 +63,16 @@ export class HomePage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  async showProfile(){
+    this.menuController.close("menu")
+  }
+
+  async showFriendsRequest(){
+    this.menuController.close("menu")
+  }
+  async showFriends(){
+    this.menuController.close("menu")
   }
 }
