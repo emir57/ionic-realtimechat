@@ -4,12 +4,14 @@ import { AlertController, MenuController, ModalController, PopoverController } f
 import { FriendsRequestPage } from '../friends-request/friends-request.page';
 import { FriendsPage } from '../friends/friends.page';
 import { LoginPage } from '../login/login.page';
+import { GroupModel } from '../models/group';
 import { Message } from '../models/message';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
 import { FriendRequestService } from '../services/friend-request.service';
 import { FriendService } from '../services/friend.service';
+import { GroupService } from '../services/group.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
@@ -22,6 +24,7 @@ export class HomePage implements OnInit {
   list: string[] = []
   inputs: any[] = [];
   currentUser: User;
+  groups:GroupModel[]=[];
   constructor(
     private chatService: ChatService,
     private menuController: MenuController,
@@ -32,7 +35,8 @@ export class HomePage implements OnInit {
     private messageService: MessageService,
     private modalController: ModalController,
     private userService: UserService,
-    private friendService: FriendService
+    private friendService: FriendService,
+    private groupService:GroupService
   ) {
     let messageModel: Message = Object.assign({ uid: "emir", text: "denemee" })
     chatService.getChats().subscribe(values => {
@@ -136,6 +140,14 @@ export class HomePage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  getGroups(){
+    this.groupService.getGroups(this.currentUser.email).subscribe(groups=>{
+      groups.forEach(group=>{
+        this.groups.push(Object.assign({},group))
+      })
+    })
   }
 
 }
