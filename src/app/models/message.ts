@@ -1,6 +1,9 @@
+import { User } from "./user";
+
 export interface Message{
   id?:string;
   text:string;
-  uid:string;
+  groupId:string;
   date:string;
+  user?:User
 }
