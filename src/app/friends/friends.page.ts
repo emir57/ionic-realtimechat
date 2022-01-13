@@ -15,6 +15,7 @@ export class FriendsPage implements OnInit {
 
   searchString:string="";
   friends: FriendModel[] = [];
+  isLoad=false;
   constructor(
     private modalController: ModalController,
     private friendService: FriendService,
@@ -24,6 +25,7 @@ export class FriendsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isLoad=true;
     this.friendService.getFriends(this.currentUserEmail).subscribe(friends => {
       friends.forEach(friend => {
         if(this.currentUserEmail == friend.currentUserEmail){
@@ -37,6 +39,9 @@ export class FriendsPage implements OnInit {
           })
         }
       })
+      setTimeout(() => {
+        this.isLoad=false;
+      }, 200);
     })
   }
 
