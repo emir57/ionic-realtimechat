@@ -11,7 +11,8 @@ export class SearchFriendPipe implements PipeTransform {
     return searchString ?
       value.filter(x=>x.user.firstName.toLocaleLowerCase().indexOf(searchString)!=-1 ||
       x.user.lastName.toLocaleLowerCase().indexOf(searchString)!=-1||
-      x.user.email.toLocaleLowerCase().indexOf(searchString)!=-1):
+      x.user.email.toLocaleLowerCase().indexOf(searchString)!=-1 ||
+      `${x.user.firstName} ${x.user.lastName}`.toLocaleLowerCase().indexOf(searchString)!=-1):
       value;
   }
 
