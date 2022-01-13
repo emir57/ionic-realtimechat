@@ -8,6 +8,7 @@ import { Message } from '../models/message';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
+import { FriendRequestService } from '../services/friend-request.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
@@ -23,6 +24,7 @@ export class HomePage implements OnInit {
     private chatService: ChatService,
     private menuController: MenuController,
     private alertController: AlertController,
+    private friendRequestService:FriendRequestService,
     private authService: AuthService,
     private router: Router,
     private messageService: MessageService,
@@ -93,5 +95,41 @@ export class HomePage implements OnInit {
       componentProps:{currentUserEmail:this.currentUser.email}
     })
     return await modal.present();
+  }
+
+  async sendFriendRequest(){
+    this.menuController.close("menu");
+    const alert = await this.alertController.create({
+      header: 'Arkadaşınızın Eposta Adresini Giriniz',
+      inputs: [
+        {
+          name: 'email',
+          type: 'email',
+          placeholder: 'email@example.com'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Kapat',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+
+          }
+        }, {
+          text: 'Gönder',
+          handler: (value) => {
+            this.friendRequestService.add(Object.assign(
+              {
+                senderUserEmail:this.currentUser.email,
+                receiveUserEmail:value.email,
+                status:0
+              }))
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

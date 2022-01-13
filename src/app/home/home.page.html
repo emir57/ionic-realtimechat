@@ -40,7 +40,12 @@
           &nbsp;Arkadaşlarım
         </ion-button>
       </ion-item>
-      <ion-item>Menu Item</ion-item>
+      <ion-item>
+        <ion-button (click)="sendFriendRequest()" fill="clear" shape="round">
+          <ion-icon name="person-add-outline"></ion-icon>
+          &nbsp;Arkadaşlık isteği gönder
+        </ion-button>
+      </ion-item>
       <ion-item>Menu Item</ion-item>
       <ion-item>
         <ion-button (click)="exit()" fill="clear" shape="round" color="danger">
