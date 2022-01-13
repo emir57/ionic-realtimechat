@@ -148,12 +148,12 @@ export class HomePage implements OnInit {
       groups.forEach(group => {
         if (this.currentUser.email === group.user1Email){
           this.userService.getUser(group.user2Email).subscribe(user=>{
-            this.groups.push(Object.assign({user:user}, group));
+            this.groups.push(Object.assign({user:user,groupName:`${user.firstName} ${user.lastName}`}, group));
           })
         }
         else if(this.currentUser.email === group.user2Email){
           this.userService.getUser(group.user1Email).subscribe(user=>{
-            this.groups.push(Object.assign({user:user}, group));
+            this.groups.push(Object.assign({user:user,groupName:`${user.firstName} ${user.lastName}`}, group));
           })
         }
       })
