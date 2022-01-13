@@ -32,6 +32,20 @@ export class ChatService {
     })
     return subject.asObservable();
   }
+  getChatsByGroupId(groupId:string):Observable<Message[]>{
+    let subject = new Subject<Message[]>();
+    let returnValues:Message[]=[]
+    this.db.list<Message>(this.collectionName).valueChanges().subscribe(values=>{
+      values.forEach(value=>{
+        if(value.groupId==groupId){
+          returnValues.push(value);
+        }
+      })
+      return subject.next(returnValues);
+    })
+    return subject.asObservable();
+  }
+
   getChat(id:string):Observable<Message>{
     let subject = new Subject<Message>();
     this.db.list<Message>(this.collectionName).valueChanges().subscribe(values=>{
