@@ -1,6 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Arkadaşlarım</ion-title>
+    <div slot="start">
+      <div *ngIf="" class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <ion-title>
+      Arkadaşlarım
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="close()">
         <ion-icon name="close-outline"></ion-icon>
