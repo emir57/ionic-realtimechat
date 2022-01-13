@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { FriendModel } from '../models/friendModel';
 import { FriendService } from '../services/friend.service';
+import { GroupService } from '../services/group.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
@@ -13,39 +14,38 @@ import { UserService } from '../services/user.service';
 export class FriendsPage implements OnInit {
   @Input() currentUserEmail: string;
 
-  searchString:string="";
+  searchString: string = "";
   friends: FriendModel[] = [];
-  isLoad=false;
+  isLoad = false;
   constructor(
     private modalController: ModalController,
     private friendService: FriendService,
     private userService: UserService,
     private messageService: MessageService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private groupService: GroupService
   ) { }
 
   ngOnInit() {
-    this.isLoad=true;
+    this.isLoad = true;
     this.friendService.getFriends(this.currentUserEmail).subscribe(friends => {
       friends.forEach(friend => {
-        if(this.currentUserEmail == friend.currentUserEmail){
+        if (this.currentUserEmail == friend.currentUserEmail) {
           this.userService.getUser(friend.friendUserEmail).subscribe(user => {
             this.friends.push(Object.assign({ user: user }, friend));
           })
         }
-        if(this.currentUserEmail == friend.friendUserEmail){
+        if (this.currentUserEmail == friend.friendUserEmail) {
           this.userService.getUser(friend.currentUserEmail).subscribe(user => {
             this.friends.push(Object.assign({ user: user }, friend));
           })
         }
       })
       setTimeout(() => {
-        this.isLoad=false;
+        this.isLoad = false;
       }, 200);
     })
   }
-
-
   close() {
     this.modalController.dismiss();
   }
@@ -60,12 +60,24 @@ export class FriendsPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-
           }
         }, {
           text: 'Çıkar',
           handler: () => {
             this.friendService.delete(friend).then(() => {
+              this.groupService.getGroups(this.currentUserEmail).subscribe(groups => {
+                groups.forEach(group => {
+                  if (friend.currentUserEmail == this.currentUserEmail) {
+                    if (group.user1Email == friend.friendUserEmail || group.user2Email == friend.friendUserEmail) {
+                      this.groupService.deleteGroup(group).then();
+                    }
+                  } else {
+                    if (group.user1Email == friend.currentUserEmail || group.user2Email == friend.currentUserEmail) {
+                      this.groupService.deleteGroup(group).then();
+                    }
+                  }
+                })
+              })
               let index = this.friends.findIndex(x => x.id === friend.id)
               this.friends.splice(index, 1);
               this.messageService.showMessage(`${friend.user.firstName} ${friend.user.lastName} başarıyla arkadaşlıktan çıkartıldı`);
