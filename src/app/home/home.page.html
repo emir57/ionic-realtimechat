@@ -57,5 +57,7 @@
 
 
 <ion-content [fullscreen]="true">
-
+  <div *ngFor="let group of groups">
+    {{group.user.email}}
+  </div>
 </ion-content>

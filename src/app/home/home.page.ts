@@ -24,7 +24,7 @@ export class HomePage implements OnInit {
   list: string[] = []
   inputs: any[] = [];
   currentUser: User;
-  groups:GroupModel[]=[];
+  groups: GroupModel[] = [];
   constructor(
     private chatService: ChatService,
     private menuController: MenuController,
@@ -36,7 +36,7 @@ export class HomePage implements OnInit {
     private modalController: ModalController,
     private userService: UserService,
     private friendService: FriendService,
-    private groupService:GroupService
+    private groupService: GroupService
   ) {
     let messageModel: Message = Object.assign({ uid: "emir", text: "denemee" })
     chatService.getChats().subscribe(values => {
@@ -45,6 +45,7 @@ export class HomePage implements OnInit {
   }
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem("user"));
+    this.getGroups();
   }
 
   showMenu() {
@@ -142,10 +143,19 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  getGroups(){
-    this.groupService.getGroups(this.currentUser.email).subscribe(groups=>{
-      groups.forEach(group=>{
-        this.groups.push(Object.assign({},group))
+  getGroups() {
+    this.groupService.getGroups(this.currentUser.email).subscribe(groups => {
+      groups.forEach(group => {
+        if (this.currentUser.email === group.user1Email){
+          this.userService.getUser(group.user2Email).subscribe(user=>{
+            this.groups.push(Object.assign({user:user}, group));
+          })
+        }
+        else if(this.currentUser.email === group.user2Email){
+          this.userService.getUser(group.user1Email).subscribe(user=>{
+            this.groups.push(Object.assign({user:user}, group));
+          })
+        }
       })
     })
   }
