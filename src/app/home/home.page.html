@@ -63,7 +63,14 @@
 
 
 <ion-content [fullscreen]="true">
-  <div *ngFor="let group of groups">
-    {{group.user.email}}
-  </div>
+  <ion-item *ngFor="let group of groups" (click)="showGroupChatModal(group)">
+    <ion-avatar slot="start">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+    </ion-avatar>
+    <ion-label slot="">
+      {{group.user.firstName}} {{group.user.lastName}}
+    </ion-label>
+    <ion-label>
+    </ion-label>
+  </ion-item>
 </ion-content>

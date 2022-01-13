@@ -167,4 +167,8 @@ export class HomePage implements OnInit {
     }, 100);
   }
 
+  showGroupChatModal(group:GroupModel){
+    console.log(group)
+  }
+
 }
