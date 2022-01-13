@@ -160,4 +160,11 @@ export class HomePage implements OnInit {
     })
   }
 
+  refresh(){
+    setTimeout(() => {
+      this.groups=[];
+      this.getGroups();
+    }, 100);
+  }
+
 }
