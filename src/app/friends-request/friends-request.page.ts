@@ -16,8 +16,8 @@ import { UserService } from '../services/user.service';
 export class FriendsRequestPage implements OnInit {
   @Input() currentUserEmail: string;
 
-  isLoad=false;
-  searchString:string="";
+  isLoad = false;
+  searchString: string = "";
   friendRequestModel: FriendRequestModel;
   friendRequests: FriendRequestModel[] = [];
   users: User[] = [];
@@ -31,7 +31,7 @@ export class FriendsRequestPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.isLoad=true;
+    this.isLoad = true;
     // this.friendRequestService.getRequestsByUser(this.currentUserEmail).subscribe(users=>{
     //   this.users = users
     // })
@@ -41,12 +41,10 @@ export class FriendsRequestPage implements OnInit {
           this.users.push(user);
           this.friendRequests.push(Object.assign({ user: user }, request))
         })
-
       })
       setTimeout(() => {
-        this.isLoad=false;
+        this.isLoad = false;
       }, 200);
-
     })
     // this.friendRequestModel = Object.assign({
     //   senderUserEmail:this.currentUserEmail,
