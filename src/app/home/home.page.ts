@@ -24,11 +24,12 @@ export class HomePage implements OnInit {
     private chatService: ChatService,
     private menuController: MenuController,
     private alertController: AlertController,
-    private friendRequestService:FriendRequestService,
+    private friendRequestService: FriendRequestService,
     private authService: AuthService,
     private router: Router,
     private messageService: MessageService,
-    private modalController:ModalController
+    private modalController: ModalController,
+    private userService: UserService
   ) {
     let messageModel: Message = Object.assign({ uid: "emir", text: "denemee" })
     chatService.getChats().subscribe(values => {
@@ -83,21 +84,21 @@ export class HomePage implements OnInit {
   async showFriendsRequest() {
     this.menuController.close("menu")
     const modal = await this.modalController.create({
-      component:FriendsRequestPage,
-      componentProps:{currentUserEmail:this.currentUser.email}
+      component: FriendsRequestPage,
+      componentProps: { currentUserEmail: this.currentUser.email }
     })
     return await modal.present();
   }
   async showFriends() {
     this.menuController.close("menu")
     const modal = await this.modalController.create({
-      component:FriendsPage,
-      componentProps:{currentUserEmail:this.currentUser.email}
+      component: FriendsPage,
+      componentProps: { currentUserEmail: this.currentUser.email }
     })
     return await modal.present();
   }
 
-  async sendFriendRequest(){
+  async sendFriendRequest() {
     this.menuController.close("menu");
     const alert = await this.alertController.create({
       header: 'Arkadaşınızın Eposta Adresini Giriniz',
@@ -121,10 +122,11 @@ export class HomePage implements OnInit {
           handler: (value) => {
             this.friendRequestService.add(Object.assign(
               {
-                senderUserEmail:this.currentUser.email,
-                receiveUserEmail:value.email,
-                status:0
+                senderUserEmail: this.currentUser.email,
+                receiveUserEmail: value.email,
+                status: 0
               }))
+            this.messageService.showMessage("Arkadaşlık isteği başarıyla gönderildi.")
           }
         }
       ]
