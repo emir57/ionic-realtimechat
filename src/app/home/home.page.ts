@@ -56,7 +56,7 @@ export class HomePage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-
+            this.menuController.open("menu")
           }
         }, {
           text: 'Çık',
