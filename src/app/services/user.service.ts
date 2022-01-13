@@ -28,7 +28,7 @@ export class UserService {
     this.fireStore.collection<User>(this.collectionName).get().subscribe(users=>{
       users.forEach(user=>{
         if(user.data().email===email){
-          return subject.next(user.data());
+          return subject.next(Object.assign({id:user.id},user.data()));
         }
       })
     })

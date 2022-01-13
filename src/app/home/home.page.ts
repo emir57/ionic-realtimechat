@@ -9,6 +9,7 @@ import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
 import { FriendRequestService } from '../services/friend-request.service';
+import { FriendService } from '../services/friend.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
@@ -19,6 +20,7 @@ import { UserService } from '../services/user.service';
 })
 export class HomePage implements OnInit {
   list: string[] = []
+  inputs: any[] = [];
   currentUser: User;
   constructor(
     private chatService: ChatService,
@@ -29,7 +31,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private messageService: MessageService,
     private modalController: ModalController,
-    private userService: UserService
+    private userService: UserService,
+    private friendService: FriendService
   ) {
     let messageModel: Message = Object.assign({ uid: "emir", text: "denemee" })
     chatService.getChats().subscribe(values => {
@@ -135,33 +138,4 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  async createGroup(){
-    const alert = await this.alertController.create({
-      header: 'Grup Oluştur',
-      inputs: [
-        {
-          name: 'groupName',
-          type: 'text',
-          placeholder: 'Group İsmi'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: () => {
-            console.log('Confirm Ok');
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
 }
