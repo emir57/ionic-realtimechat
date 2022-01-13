@@ -27,7 +27,7 @@ export class FriendService {
     let returnValues:FriendModel[]=[]
     this.fireStoreService.collection<FriendModel>(this.collectionName).get().subscribe(doc=>{
       doc.docs.forEach(doc=>{
-        if(doc.data().currentUserEmail === currentUserEmail){
+        if(doc.data().currentUserEmail === currentUserEmail || doc.data().friendUserEmail === currentUserEmail){
           returnValues.push(Object.assign({id:doc.id},doc.data()));
         }
       })

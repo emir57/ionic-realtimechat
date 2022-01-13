@@ -26,9 +26,16 @@ export class FriendsPage implements OnInit {
   ngOnInit() {
     this.friendService.getFriends(this.currentUserEmail).subscribe(friends => {
       friends.forEach(friend => {
-        this.userService.getUser(friend.friendUserEmail).subscribe(user => {
-          this.friends.push(Object.assign({ user: user }, friend));
-        })
+        if(this.currentUserEmail == friend.currentUserEmail){
+          this.userService.getUser(friend.friendUserEmail).subscribe(user => {
+            this.friends.push(Object.assign({ user: user }, friend));
+          })
+        }
+        if(this.currentUserEmail == friend.friendUserEmail){
+          this.userService.getUser(friend.currentUserEmail).subscribe(user => {
+            this.friends.push(Object.assign({ user: user }, friend));
+          })
+        }
       })
     })
   }
