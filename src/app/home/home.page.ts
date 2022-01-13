@@ -134,4 +134,34 @@ export class HomePage implements OnInit {
 
     await alert.present();
   }
+
+  async createGroup(){
+    const alert = await this.alertController.create({
+      header: 'Grup Oluştur',
+      inputs: [
+        {
+          name: 'groupName',
+          type: 'text',
+          placeholder: 'Group İsmi'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }

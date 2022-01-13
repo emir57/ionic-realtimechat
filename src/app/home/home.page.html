@@ -11,9 +11,6 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
-</ion-content>
 <ion-menu side="start" menuId="menu">
   <ion-header>
     <ion-toolbar color="primary">
@@ -57,3 +54,12 @@
   </ion-content>
 </ion-menu>
 <ion-router-outlet main></ion-router-outlet>
+
+
+<ion-content [fullscreen]="true">
+  <div style="margin-bottom: 5%;border-bottom: 1px solid #E5E8E8;">
+    <ion-button (click)="createGroup()" fill="clear" shape="round">
+      Grup Oluştur
+    </ion-button>
+  </div>
+</ion-content>
