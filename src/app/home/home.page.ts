@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, MenuController, ModalController, PopoverController } from '@ionic/angular';
 import { FriendsRequestPage } from '../friends-request/friends-request.page';
 import { FriendsPage } from '../friends/friends.page';
+import { GroupPage } from '../group/group.page';
 import { LoginPage } from '../login/login.page';
 import { GroupModel } from '../models/group';
 import { Message } from '../models/message';
@@ -167,8 +168,12 @@ export class HomePage implements OnInit {
     }, 100);
   }
 
-  showGroupChatModal(group:GroupModel){
-    console.log(group)
+  async showGroupChatModal(group:GroupModel){
+    const modal = await this.modalController.create({
+      component:GroupPage,
+      componentProps:{group:group}
+    })
+    return await modal.present();
   }
 
 }
