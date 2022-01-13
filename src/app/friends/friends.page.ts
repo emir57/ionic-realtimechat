@@ -63,12 +63,12 @@ export class FriendsPage implements OnInit {
 
           }
         }, {
-          text: 'Çık',
+          text: 'Çıkar',
           handler: () => {
             this.friendService.delete(friend).then(() => {
               let index = this.friends.findIndex(x => x.id === friend.id)
               this.friends.splice(index, 1);
-              this.messageService.showMessage(`${friend.user.firstName} ${friend.user.lastName} başarıyla arkadaşlıktan çıakrtıldı`);
+              this.messageService.showMessage(`${friend.user.firstName} ${friend.user.lastName} başarıyla arkadaşlıktan çıkartıldı`);
             })
 
           }
