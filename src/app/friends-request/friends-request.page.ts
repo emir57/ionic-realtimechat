@@ -2,9 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FriendModel } from '../models/friendModel';
 import { FriendRequestModel } from '../models/friendRequestModel';
+import { GroupModel } from '../models/group';
 import { User } from '../models/user';
 import { FriendRequestService } from '../services/friend-request.service';
 import { FriendService } from '../services/friend.service';
+import { GroupService } from '../services/group.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
@@ -22,12 +24,14 @@ export class FriendsRequestPage implements OnInit {
   friendRequests: FriendRequestModel[] = [];
   users: User[] = [];
   friendModel: FriendModel;
+  groupModel:GroupModel;
   constructor(
     private modalController: ModalController,
     private friendRequestService: FriendRequestService,
     private userService: UserService,
     private friendService: FriendService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private groupService:GroupService
   ) { }
 
   ngOnInit() {
@@ -60,10 +64,15 @@ export class FriendsRequestPage implements OnInit {
   }
 
   accept(request: FriendRequestModel) {
+    this.groupModel = Object.assign({
+      user1Email:this.currentUserEmail,
+      user2Email:request.user.email
+    })
     this.friendModel = Object.assign({
       currentUserEmail: this.currentUserEmail,
-      friendUserEmail: request.user.email
+      friendUserEmail: request.user.email,
     })
+    this.groupService.createGroup(this.groupModel).then();
     this.friendService.add(this.friendModel).then(() => {
       this.modalController.dismiss();
       this.messageService.showMessage(`${request.user.firstName} ${request.user.lastName} başarıyla eklendi`);
