@@ -6,8 +6,13 @@ import { FriendModel } from '../models/friendModel';
 })
 export class SearchFriendPipe implements PipeTransform {
 
-  transform(value: FriendModel[], ...args: unknown[]): FriendModel[] {
-    return null;
+  transform(value: FriendModel[], searchString:string): FriendModel[] {
+    searchString = searchString ? searchString.toLocaleLowerCase():"";
+    return searchString ?
+      value.filter(x=>x.user.firstName.toLocaleLowerCase().indexOf(searchString)!=-1 ||
+      x.user.lastName.toLocaleLowerCase().indexOf(searchString)!=-1||
+      x.user.email.toLocaleLowerCase().indexOf(searchString)!=-1):
+      value;
   }
 
 }
