@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar>
+    <div slot="start">
+      <div *ngIf="isLoad" class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
     <ion-title>Arkadaşlık İsteklerim</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="close()">
