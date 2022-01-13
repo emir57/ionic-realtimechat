@@ -16,6 +16,8 @@ export class GroupService {
   ) { }
 
   createGroup(groupModel: GroupModel) {
+    let date = new Date;
+    groupModel.groupCreateDate= date.toString();
     return this.fireStoreService.collection(this.collectionName).add(groupModel);
   }
   deleteGroup(groupModel: GroupModel) {
