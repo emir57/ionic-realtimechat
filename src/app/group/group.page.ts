@@ -23,7 +23,6 @@ export class GroupPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.group);
     this.getMessages();
     this.setScrollPosition();
 
@@ -64,7 +63,6 @@ export class GroupPage implements OnInit {
     setTimeout(() => {
       const messageDiv = document.getElementById("messageDiv");
       let maxHeight = messageDiv.scrollHeight;
-      console.log(maxHeight)
       messageDiv.scrollTop = maxHeight;
     }, 100);
   }
