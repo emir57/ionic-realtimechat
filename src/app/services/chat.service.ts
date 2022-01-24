@@ -36,6 +36,7 @@ export class ChatService {
     let subject = new Subject<Message[]>();
     let returnValues:Message[]=[]
     this.db.list<Message>(this.collectionName).valueChanges().subscribe(values=>{
+      returnValues=[];
       values.forEach(value=>{
         if(value.groupId==groupId){
           returnValues.push(value);
