@@ -14,8 +14,6 @@
     <div class="messageBox"></div>
   </div>
   <div id="bottomBar">
-    <form [formGroup]="sendMessageForm">
-      <input formControlName="message" type="text">
-    </form>
+      <input [(ngModel)]="message" type="text">
   </div>
 </ion-content>

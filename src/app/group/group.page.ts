@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { GroupModel } from '../models/group';
 
@@ -11,22 +10,17 @@ import { GroupModel } from '../models/group';
 export class GroupPage implements OnInit {
   @Input() group:GroupModel;
 
-  sendMessageForm:FormGroup
+  message:string="";
   constructor(
-    private modalController:ModalController,
-    private formBuilder:FormBuilder
+    private modalController:ModalController
   ) { }
 
   ngOnInit() {
-    this.createSendMessageForm();
+
   }
   dismiss(){
     this.modalController.dismiss();
   }
-  createSendMessageForm(){
-    this.sendMessageForm = this.formBuilder.group({
-      message:["",[Validators.required,Validators.maxLength(255)]]
-    })
-  }
+
 
 }
