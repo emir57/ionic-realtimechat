@@ -10,11 +10,20 @@
 </ion-header>
 
 <ion-content>
+  <!-- Message Div -->
   <div id="messageDiv">
-    <div class="messageBoxUser"></div>
-    <div class="spaceDiv"></div>
-    <div class="messageBox"></div>
+    <div *ngFor="let chat of chats">
+      <div *ngIf="chat.user.email==currentUser.email">
+        <div class="messageBoxUser"></div>
+        <div class="spaceDiv"></div>
+      </div>
+      <div *ngIf="chat.user.email!=currentUser.email">
+        <div class="messageBox"></div>
+        <div class="spaceDiv"></div>
+      </div>
+    </div>
   </div>
+  <!-- Message Div End-->
   <div id="bottomBar">
     <div class="row">
       <div class="col-10">

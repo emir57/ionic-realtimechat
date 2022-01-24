@@ -171,7 +171,7 @@ export class HomePage implements OnInit {
   async showGroupChatModal(group:GroupModel){
     const modal = await this.modalController.create({
       component:GroupPage,
-      componentProps:{group:group}
+      componentProps:{group:group,currentUser:this.currentUser}
     })
     return await modal.present();
   }

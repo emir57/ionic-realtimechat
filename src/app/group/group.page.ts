@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { GroupModel } from '../models/group';
 import { ChatService } from '../services/chat.service';
 import { Message } from "../models/message";
+import { User } from '../models/user';
 @Component({
   selector: 'app-group',
   templateUrl: './group.page.html',
@@ -10,6 +11,7 @@ import { Message } from "../models/message";
 })
 export class GroupPage implements OnInit {
   @Input() group:GroupModel;
+  @Input() currentUser:User;
 
   chats:Message[]=[]
   message:string="";
