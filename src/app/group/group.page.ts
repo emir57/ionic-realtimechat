@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { GroupModel } from '../models/group';
 
@@ -10,8 +11,10 @@ import { GroupModel } from '../models/group';
 export class GroupPage implements OnInit {
   @Input() group:GroupModel;
 
+  sendMessageForm:FormGroup
   constructor(
-    private modalController:ModalController
+    private modalController:ModalController,
+    private formBuilder:FormBuilder
   ) { }
 
   ngOnInit() {
