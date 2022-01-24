@@ -11,10 +11,29 @@
   height: 94%;
 }
 .messageBox{
+  margin-bottom: 1%;
+  display: block;
   width: 60%;
   min-height: 5%;
   background-color: #3498DB;
+  float: left;
+
   margin-left:1%;
+  border-radius: 5%;
+  border: 1px solid grey;
+}
+.spaceDiv{
+  width: 100%;
+  display: block;
+}
+.messageBoxUser{
+  margin-bottom: 1%;
+  display: block;
+  width: 60%;
+  min-height: 5%;
+  background-color: #3498DB;
+  float: right;
+  margin-right: 1%;
   border-radius: 5%;
   border: 1px solid grey;
 }
