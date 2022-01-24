@@ -29,11 +29,18 @@ export class GroupPage implements OnInit {
   }
 
   sendMessage(){
-
+    let message = Object.assign({
+      text:this.message,
+      groupId:this.group.id,
+      user:this.currentUser
+    });
+    this.chatService.add(message)
+    this.message="";
   }
 
   getMessages(){
     this.chatService.getChatsByGroupId(this.group.id).subscribe(chats=>{
+      this.chats=null;
       this.chats = chats;
       console.log(chats)
     })

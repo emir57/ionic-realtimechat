@@ -14,11 +14,11 @@
   <div id="messageDiv">
     <div *ngFor="let chat of chats">
       <div *ngIf="chat.user.email==currentUser.email">
-        <div class="messageBoxUser"></div>
+        <div class="messageBoxUser">{{chat.text}}</div>
         <div class="spaceDiv"></div>
       </div>
       <div *ngIf="chat.user.email!=currentUser.email">
-        <div class="messageBox"></div>
+        <div class="messageBox">{{chat.text}}</div>
         <div class="spaceDiv"></div>
       </div>
     </div>
