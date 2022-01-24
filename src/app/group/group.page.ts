@@ -10,43 +10,53 @@ import { User } from '../models/user';
   styleUrls: ['./group.page.scss'],
 })
 export class GroupPage implements OnInit {
-  @Input() group:GroupModel;
-  @Input() currentUser:User;
+  @Input() group: GroupModel;
+  @Input() currentUser: User;
 
-  chats:Message[]=[]
-  message:string="";
+  chats: Message[] = []
+  message: string = "";
   constructor(
-    private modalController:ModalController,
-    private chatService:ChatService
-  ) { }
+    private modalController: ModalController,
+    private chatService: ChatService
+  ) {
+
+  }
 
   ngOnInit() {
     console.log(this.group);
     this.getMessages();
+
+    setTimeout(() => {
+      const messageDiv = document.getElementById("messageDiv");
+      let maxHeight = messageDiv.scrollHeight;
+      console.log(maxHeight)
+      messageDiv.scrollTop = maxHeight;
+    }, 1000);
+
   }
-  dismiss(){
+  dismiss() {
     this.modalController.dismiss();
   }
 
-  sendMessage(){
+  sendMessage() {
     let message = Object.assign({
-      text:this.message,
-      groupId:this.group.id,
-      user:this.currentUser
+      text: this.message,
+      groupId: this.group.id,
+      user: this.currentUser
     });
     this.chatService.add(message)
-    this.message="";
+    this.message = "";
   }
 
-  getMessages(){
-    this.chatService.getChatsByGroupId(this.group.id).subscribe(chats=>{
-      this.chats=null;
+  getMessages() {
+    this.chatService.getChatsByGroupId(this.group.id).subscribe(chats => {
+      this.chats = null;
       this.chats = chats;
       console.log(chats)
     })
   }
 
-  getDate(dateString:string){
+  getDate(dateString: string) {
     let date = new Date(dateString);
     let hours = date.getHours();
     let minutes = date.getMinutes();
