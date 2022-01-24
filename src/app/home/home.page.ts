@@ -40,9 +40,9 @@ export class HomePage implements OnInit {
     private groupService: GroupService
   ) {
     let messageModel: Message = Object.assign({ uid: "emir", text: "denemee" })
-    chatService.getChats().subscribe(values => {
-      console.log(values)
-    })
+    // chatService.getChats().subscribe(values => {
+    //   console.log(values)
+    // })
   }
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem("user"));
