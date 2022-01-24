@@ -2,40 +2,33 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: red;
   height: 6%;
 }
 #messageDiv{
   width: 100%;
-  background-color: blue;
   height: 94%;
   overflow-y: scroll;
 }
-.messageBox{
+.messageBoxGlobal{
   margin-bottom: 1%;
-  display: block;
   width: 60%;
+  display: block;
   min-height: 5%;
   background-color: #3498DB;
-  float: left;
-  margin-left:1%;
   border-radius: 5%;
   border: 1px solid grey;
+}
+.messageBox{
+  float: left;
+  margin-left:1%;
 }
 .spaceDiv{
   width: 100%;
   display: block;
 }
 .messageBoxUser{
-  margin-bottom: 1%;
-  display: block;
-  width: 60%;
-  min-height: 5%;
-  background-color: #3498DB;
   float: right;
   margin-right: 1%;
-  border-radius: 5%;
-  border: 1px solid grey;
 }
 #messageInput{
   max-width: 100%;
