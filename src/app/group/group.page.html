@@ -16,7 +16,7 @@
       <div *ngIf="chat.user.email==currentUser.email">
         <div class="messageBoxUser messageBoxGlobal">
           {{chat.text}}
-          <div class="messageBoxDate">{{chat.date}}</div>
+          <div class="messageBoxDate text-white">{{getDate(chat.date)}}</div>
         </div>
         <div class="spaceDiv"></div>
       </div>

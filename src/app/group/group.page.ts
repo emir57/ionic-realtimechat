@@ -46,5 +46,15 @@ export class GroupPage implements OnInit {
     })
   }
 
+  getDate(dateString:string){
+    let date = new Date(dateString);
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let year = date.getFullYear();
+    let day = date.getDate();
+    let month = date.getDay();
+    return `${day}.${month}.${year} - ${hours}:${minutes}`
+  }
+
 
 }
