@@ -21,7 +21,10 @@
         <div class="spaceDiv"></div>
       </div>
       <div *ngIf="chat.user.email!=currentUser.email">
-        <div class="messageBox messageBoxGlobal">{{chat.text}}</div>
+        <div class="messageBox messageBoxGlobal">
+          {{chat.text}}
+          <div class="messageBoxDate text-white">{{getDate(chat.date)}}</div>
+        </div>
         <div class="spaceDiv"></div>
       </div>
     </div>
