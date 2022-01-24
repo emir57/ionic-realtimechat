@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { GroupModel } from '../models/group';
 
 @Component({
@@ -9,10 +10,15 @@ import { GroupModel } from '../models/group';
 export class GroupPage implements OnInit {
   @Input() group:GroupModel;
 
-  constructor() { }
+  constructor(
+    private modalController:ModalController
+  ) { }
 
   ngOnInit() {
     console.log(this.group)
+  }
+  dismiss(){
+    this.modalController.dismiss();
   }
 
 }
