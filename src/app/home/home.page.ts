@@ -147,8 +147,8 @@ export class HomePage implements OnInit {
   getGroups() {
     this.groupService.getGroups(this.currentUser.email).subscribe(groups => {
       groups.forEach(group => {
-        this.groups = [];
         this.chatService.getChatsByGroupId(group.id).subscribe(messages => {
+          this.groups = [];
           let lastMsg = messages.sort((x, y) => new Date(y.date).getTime() - new Date(x.date).getTime())
           if (this.currentUser.email === group.user1Email) {
             this.userService.getUser(group.user2Email).subscribe(user => {
@@ -183,6 +183,16 @@ export class HomePage implements OnInit {
       componentProps: { group: group, currentUser: this.currentUser }
     })
     return await modal.present();
+  }
+
+  getDate(dateString: string) {
+    let date = new Date(dateString);
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let year = date.getFullYear();
+    let day = date.getDate();
+    let month = date.getDay();
+    return `${day}.${month}.${year} - ${hours}:${minutes}`
   }
 
 }

@@ -73,7 +73,7 @@
     <ion-label>
       <span *ngIf="group.lastMessage">
         {{group.lastMessage.text}}
-      </span> <span style="float:right;font-size: small;">25.01.2022 - 16.10</span>
+      </span> <span style="float:right;font-size: small;">{{getDate(group.lastMessage.date)}}</span>
     </ion-label>
   </ion-item>
 </ion-content>

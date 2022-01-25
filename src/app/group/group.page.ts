@@ -18,7 +18,7 @@ export class GroupPage implements OnInit {
   message: string = "";
   constructor(
     private modalController: ModalController,
-    private chatService: ChatService
+    private chatService: ChatService,
   ) {
 
   }
