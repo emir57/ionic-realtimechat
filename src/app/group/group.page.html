@@ -15,6 +15,7 @@
     <div *ngFor="let chat of chats">
       <div *ngIf="chat.user.email==currentUser.email">
         <div class="messageBoxUser messageBoxGlobal">
+          <div class="username text-white">Ben</div>
           {{chat.text}}
           <div class="messageBoxDate text-white">{{getDate(chat.date)}}</div>
         </div>
@@ -23,7 +24,6 @@
       <div *ngIf="chat.user.email!=currentUser.email">
         <div class="messageBox messageBoxGlobal">
           <div class="username text-white">{{chat.user.firstName}} {{chat.user.lastName}}</div>
-
           {{chat.text}}
           <div class="messageBoxDate text-white">{{getDate(chat.date)}}</div>
         </div>
