@@ -4,7 +4,10 @@
       <div *ngIf="isLoad" class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
-      &nbsp;{{group.user.firstName}} {{group.user.lastName}}
+      &nbsp;
+      <img width="40" style="border-radius: 50%;" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+
+      {{group.user.firstName}} {{group.user.lastName}}
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
