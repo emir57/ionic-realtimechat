@@ -20,7 +20,7 @@
   border: 1px solid #2E86C1;
   padding-bottom: 5%;
   padding-right: 2%;
-  padding-top: 5%;
+  padding-top: 7%;
   padding-left: 2%;
 }
 .messageBoxDate{
@@ -51,7 +51,9 @@
   background-color: #28B463;
 }
 .username{
+  width: 100%;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 1%;
+  border-bottom: 1px solid white;
 }
