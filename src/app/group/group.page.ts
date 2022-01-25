@@ -25,8 +25,6 @@ export class GroupPage implements OnInit {
   ngOnInit() {
     this.getMessages();
     this.setScrollPosition();
-
-
   }
   dismiss() {
     this.modalController.dismiss();

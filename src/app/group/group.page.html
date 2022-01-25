@@ -36,7 +36,7 @@
         <input id="messageInput" class="form-control" [(ngModel)]="message" type="text">
       </div>
       <div class="col-2">
-        <button [disabled]="!message" id="sendButton" (click)="sendMessage()">
+        <button [disabled]="!message || !message.trim()" id="sendButton" (click)="sendMessage()">
           <ion-icon name="send-outline"></ion-icon>
         </button>
       </div>
