@@ -1,3 +1,4 @@
+import { Message } from "./message";
 import { User } from "./user";
 
 export interface GroupModel{
@@ -7,4 +8,5 @@ export interface GroupModel{
   user1Email:string;
   user2Email:string;
   user?:User
+  lastMessage?:Message;
 }

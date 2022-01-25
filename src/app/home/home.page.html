@@ -63,7 +63,7 @@
 
 
 <ion-content [fullscreen]="true">
-  <ion-item *ngFor="let group of groups" (click)="showGroupChatModal(group)">
+  <ion-item *ngFor="let group of groups" (click)="showGroupChatModal(group)" detail>
     <ion-avatar slot="start">
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
     </ion-avatar>
@@ -71,8 +71,8 @@
       {{group.user.firstName}} {{group.user.lastName}}
     </ion-label>
     <ion-label>
-      <span>
-        son mesaj
+      <span *ngIf="group.lastMessage">
+        {{group.lastMessage.text}}
       </span> <span style="float:right;font-size: small;">25.01.2022 - 16.10</span>
     </ion-label>
   </ion-item>

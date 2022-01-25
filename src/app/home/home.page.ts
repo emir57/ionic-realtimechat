@@ -147,16 +147,25 @@ export class HomePage implements OnInit {
   getGroups() {
     this.groupService.getGroups(this.currentUser.email).subscribe(groups => {
       groups.forEach(group => {
-        if (this.currentUser.email === group.user1Email){
-          this.userService.getUser(group.user2Email).subscribe(user=>{
-            this.groups.push(Object.assign({user:user,groupName:`${user.firstName} ${user.lastName}`}, group));
-          })
-        }
-        else if(this.currentUser.email === group.user2Email){
-          this.userService.getUser(group.user1Email).subscribe(user=>{
-            this.groups.push(Object.assign({user:user,groupName:`${user.firstName} ${user.lastName}`}, group));
-          })
-        }
+        this.chatService.getChatsByGroupId(group.id).subscribe(chats=>{
+          let lastMsg = chats.sort((x,y)=>new Date(y.date).getTime() - new Date(x.date).getTime())
+
+          if (this.currentUser.email === group.user1Email){
+            this.userService.getUser(group.user2Email).subscribe(user=>{
+              this.groups.push(Object.assign({
+                user:user,groupName:`${user.firstName} ${user.lastName}`,lastMessage:lastMsg[0]}, group));
+            })
+          }
+          else if(this.currentUser.email === group.user2Email){
+            this.userService.getUser(group.user1Email).subscribe(user=>{
+              this.groups.push(Object.assign({
+                user:user,groupName:`${user.firstName} ${user.lastName}`,lastMessage:lastMsg[0]}, group));
+            })
+          }
+
+
+        })
+
       })
     })
   }
