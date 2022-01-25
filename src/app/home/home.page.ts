@@ -147,6 +147,7 @@ export class HomePage implements OnInit {
   getGroups() {
     this.groupService.getGroups(this.currentUser.email).subscribe(groups => {
       groups.forEach(group => {
+        this.groups=[];
         this.chatService.getChatsByGroupId(group.id).subscribe(chats=>{
           let lastMsg = chats.sort((x,y)=>new Date(y.date).getTime() - new Date(x.date).getTime())
 

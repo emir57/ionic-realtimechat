@@ -46,7 +46,6 @@ export class ChatService {
     })
     return subject.asObservable();
   }
-
   getChat(id:string):Observable<Message>{
     let subject = new Subject<Message>();
     this.db.list<Message>(this.collectionName).valueChanges().subscribe(values=>{
