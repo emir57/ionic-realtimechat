@@ -13,6 +13,7 @@ export class GroupPage implements OnInit {
   @Input() group: GroupModel;
   @Input() currentUser: User;
 
+  isLoad=true;
   chats: Message[] = []
   message: string = "";
   constructor(
@@ -44,6 +45,7 @@ export class GroupPage implements OnInit {
     this.chatService.getChatsByGroupId(this.group.id).subscribe(chats => {
       this.chats = chats;
       this.setScrollPosition();
+      this.isLoad=false;
     })
   }
 
