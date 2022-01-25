@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, Subject } from 'rxjs';
 import { GroupModel } from '../models/group';
-import { GroupChatModel } from '../models/groupChatModel';
 import { Message } from '../models/message';
 
 
@@ -34,19 +33,15 @@ export class ChatService {
     })
     return subject.asObservable();
   }
-  getChatsAndGroup(groupId: string): Observable<GroupChatModel> {
-    let subject = new Subject<GroupChatModel>();
-    let returnValues: GroupChatModel = null
+  getChatsByGroupId(groupId: string): Observable<Message[]> {
+    let subject = new Subject<Message[]>();
+    let returnValues: Message[] = [];
     this.db.list<Message>(this.collectionName).valueChanges().subscribe(values => {
-      returnValues.messages = [];
+      returnValues = [];
       values.forEach(value => {
         if (value.groupId == groupId) {
-          returnValues.messages.push(value);
+          returnValues.push(value);
         }
-      })
-      this.db.list<GroupModel>("groups").valueChanges().subscribe(values => {
-        returnValues.groups=[];
-        returnValues.groups = values;
       })
       return subject.next(returnValues);
     })

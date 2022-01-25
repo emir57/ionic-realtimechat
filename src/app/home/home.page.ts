@@ -147,41 +147,40 @@ export class HomePage implements OnInit {
   getGroups() {
     this.groupService.getGroups(this.currentUser.email).subscribe(groups => {
       groups.forEach(group => {
-        this.groups=[];
-        this.chatService.getChatsByGroupId(group.id).subscribe(chats=>{
-          let lastMsg = chats.sort((x,y)=>new Date(y.date).getTime() - new Date(x.date).getTime())
-
-          if (this.currentUser.email === group.user1Email){
-            this.userService.getUser(group.user2Email).subscribe(user=>{
+        this.groups = [];
+        this.chatService.getChatsByGroupId(group.id).subscribe(messages => {
+          let lastMsg = messages.sort((x, y) => new Date(y.date).getTime() - new Date(x.date).getTime())
+          if (this.currentUser.email === group.user1Email) {
+            this.userService.getUser(group.user2Email).subscribe(user => {
               this.groups.push(Object.assign({
-                user:user,groupName:`${user.firstName} ${user.lastName}`,lastMessage:lastMsg[0]}, group));
+                user: user, groupName: `${user.firstName} ${user.lastName}`, lastMessage: lastMsg[0]
+              }, group));
             })
           }
-          else if(this.currentUser.email === group.user2Email){
-            this.userService.getUser(group.user1Email).subscribe(user=>{
+          else if (this.currentUser.email === group.user2Email) {
+            this.userService.getUser(group.user1Email).subscribe(user => {
               this.groups.push(Object.assign({
-                user:user,groupName:`${user.firstName} ${user.lastName}`,lastMessage:lastMsg[0]}, group));
+                user: user, groupName: `${user.firstName} ${user.lastName}`, lastMessage: lastMsg[0]
+              }, group));
             })
           }
-
-
         })
 
       })
     })
   }
 
-  refresh(){
+  refresh() {
     setTimeout(() => {
-      this.groups=[];
+      this.groups = [];
       this.getGroups();
     }, 100);
   }
 
-  async showGroupChatModal(group:GroupModel){
+  async showGroupChatModal(group: GroupModel) {
     const modal = await this.modalController.create({
-      component:GroupPage,
-      componentProps:{group:group,currentUser:this.currentUser}
+      component: GroupPage,
+      componentProps: { group: group, currentUser: this.currentUser }
     })
     return await modal.present();
   }
