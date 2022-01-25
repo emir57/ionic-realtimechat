@@ -22,6 +22,8 @@
       </div>
       <div *ngIf="chat.user.email!=currentUser.email">
         <div class="messageBox messageBoxGlobal">
+          <div class="username">{{chat.user.firstName}} {{chat.user.lastName}}</div>
+
           {{chat.text}}
           <div class="messageBoxDate text-white">{{getDate(chat.date)}}</div>
         </div>
