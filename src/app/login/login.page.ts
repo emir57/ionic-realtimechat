@@ -63,6 +63,7 @@ export class LoginPage implements OnInit {
   }
   async loginWithPhone() {
     if (this.loginForm.valid) {
+      this.isOk=false;
       let phoneNumber = this.loginForm.get("phone").value;
       this.authService.loginWithPhone(phoneNumber)
         .then(async (confirmationResult) => {
