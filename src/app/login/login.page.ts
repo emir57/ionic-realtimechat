@@ -63,7 +63,8 @@ export class LoginPage implements OnInit {
   }
   async loginWithPhone() {
     if (this.loginForm.valid) {
-      this.authService.loginWithPhone(this.loginForm.get("phone").value)
+      let phoneNumber = this.loginForm.get("phone").value;
+      this.authService.loginWithPhone(phoneNumber)
         .then(async (confirmationResult) => {
           // var code = window.prompt("please your code");
           // return confirmationResult.confirm(code);
@@ -71,7 +72,19 @@ export class LoginPage implements OnInit {
           code.subscribe(code => {
             return confirmationResult.confirm(code)
             .then(() => {
-              this.userService.getUser(this.loginForm.get("phone").value).subscribe(user => {
+              this.userService.checkUserByPhone(phoneNumber).subscribe(status=>{
+                if(status==false){
+                  let user = Object.assign({
+                    firstName:phoneNumber,
+                    lastName:"",
+                    email:"",
+                    profileUrl:"",
+                    phoneNumber:phoneNumber
+                  })
+                  this.userService.addUser(user).then(()=>{})
+                }
+              })
+              this.userService.getUserByPhone(phoneNumber).subscribe(user => {
                 localStorage.setItem("user", JSON.stringify(user));
               })
               setTimeout(() => {
