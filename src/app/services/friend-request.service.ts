@@ -40,6 +40,19 @@ export class FriendRequestService {
     })
     return subject.asObservable();
   }
+  checkRequests(currentUserPhoneNumber:string,friendUserPhone:string):Observable<boolean>{
+    let subject = new Subject<boolean>();
+    let status = false;
+    this.fireStoreService.collection<FriendRequestModel>(this.collectionName).get().subscribe(requests=>{
+      requests.docs.forEach(request=>{
+        if((request.data().receiveUserPhoneNumber===currentUserPhoneNumber && request.data().senderUserPhoneNumber === friendUserPhone) ||(request.data().senderUserPhoneNumber===currentUserPhoneNumber && request.data().receiveUserPhoneNumber === friendUserPhone)){
+            status = true;
+          }
+        })
+      })
+      subject.next(status);
+    return subject.asObservable();
+  }
   getRequests(currentUserPhoneNumber:string):Observable<FriendRequestModel[]>{
     let subject = new Subject<FriendRequestModel[]>();
     let returnValues:FriendRequestModel[] = [];
