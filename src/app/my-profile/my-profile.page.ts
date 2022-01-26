@@ -42,11 +42,12 @@ export class MyProfilePage implements OnInit {
         localStorage.setItem("user",JSON.stringify(user));
         this.messageService.showMessage("Güncelleniyor");
         setTimeout(() => {
-          this.messageService.showMessage("Başarıyla güncellendi.");
+          this.router.navigate(["home"]);
         }, 500);
         setTimeout(() => {
-          this.router.navigate(["home"]);
-        }, 1000);
+          this.messageService.showMessage("Başarıyla güncellendi.");
+          window.location.reload();
+        }, 500);
       })
     }
   }
