@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Observable, Subject } from 'rxjs';
 import { LoginModel } from '../models/loginModel';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from '../services/message.service';
@@ -33,7 +34,7 @@ export class LoginPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['emir.gurbuz06@hotmail.com', [Validators.required, Validators.email, Validators.maxLength(50)]],
       password: ['123456', [Validators.minLength(6), Validators.required]],
-      phone: ['+90', [Validators.minLength(6), Validators.required]],
+      phone: ['+90', [Validators.minLength(13), Validators.required]],
     })
   }
 
@@ -60,21 +61,29 @@ export class LoginPage implements OnInit {
       })
     }
   }
-  loginWithPhone(){
+  async loginWithPhone() {
     if (this.loginForm.valid) {
-      this.authService.loginWithPhone(this.loginForm.get("phone").value).then((confirmationResult)=>{
-        var code = window.prompt("please your code");
-        return confirmationResult.confirm(code);
-      }).then(()=>{
-        this.userService.getUser(this.loginForm.get("phone").value).subscribe(user => {
-          localStorage.setItem("user", JSON.stringify(user));
+      this.authService.loginWithPhone(this.loginForm.get("phone").value)
+        .then(async (confirmationResult) => {
+          // var code = window.prompt("please your code");
+          // return confirmationResult.confirm(code);
+          var code = await this.GetCode();
+          code.subscribe(code => {
+            return confirmationResult.confirm(code);
+          })
+        }).then(() => {
+          this.userService.getUser(this.loginForm.get("phone").value).subscribe(user => {
+            localStorage.setItem("user", JSON.stringify(user));
+          })
+          setTimeout(() => {
+            this.messageService.showMessage("Giriş Başarılı");
+            this.router.navigate(["home"])
+          }, 1300);
         })
-        setTimeout(() => {
-          this.messageService.showMessage("Giriş Başarılı");
-          this.router.navigate(["home"])
-        }, 1300);
-      })
-      .catch((error)=>console.log(error))
+        .catch((error) => {
+          this.messageService.showMessage(error)
+          this.messageService.showMessage(this.messageService.GetErrorMessage(error.code))
+        })
     }
   }
 
@@ -85,7 +94,7 @@ export class LoginPage implements OnInit {
         {
           name: 'email',
           type: 'email',
-          value:this.loginForm.get("email").value,
+          value: this.loginForm.get("email").value,
           placeholder: 'email@example.com'
         },
       ],
@@ -110,6 +119,30 @@ export class LoginPage implements OnInit {
     });
 
     await alert.present();
+  }
+  async GetCode(): Promise<Observable<string>> {
+    let subject = new Subject<string>();
+    const alert = await this.alertController.create({
+      header: 'Prompt!',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'Placeholder 1'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Doğrula',
+          handler: (value) => {
+            return subject.next(value.name1)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+    return subject.asObservable();
   }
 
 }
