@@ -69,16 +69,17 @@ export class LoginPage implements OnInit {
           // return confirmationResult.confirm(code);
           var code = await this.GetCode();
           code.subscribe(code => {
-            return confirmationResult.confirm(code);
+            return confirmationResult.confirm(code)
+            .then(() => {
+              this.userService.getUser(this.loginForm.get("phone").value).subscribe(user => {
+                localStorage.setItem("user", JSON.stringify(user));
+              })
+              setTimeout(() => {
+                this.messageService.showMessage("Giriş Başarılı");
+                this.router.navigate(["home"])
+              }, 1300);
+            });
           })
-        }).then(() => {
-          this.userService.getUser(this.loginForm.get("phone").value).subscribe(user => {
-            localStorage.setItem("user", JSON.stringify(user));
-          })
-          setTimeout(() => {
-            this.messageService.showMessage("Giriş Başarılı");
-            this.router.navigate(["home"])
-          }, 1300);
         })
         .catch((error) => {
           this.messageService.showMessage(error)
