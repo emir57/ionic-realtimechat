@@ -67,12 +67,12 @@ export class FriendsPage implements OnInit {
             this.friendService.delete(friend).then(() => {
               this.groupService.getGroups(this.currentUserEmail).subscribe(groups => {
                 groups.forEach(group => {
-                  if (friend.currentUserEmail == this.currentUserEmail) {
-                    if (group.user1Email == friend.friendUserEmail || group.user2Email == friend.friendUserEmail) {
+                  if (friend.currentUserPhoneNumber == this.currentUserEmail) {
+                    if (group.user1Email == friend.friendUserPhoneNumber || group.user2Email == friend.friendUserPhoneNumber) {
                       this.groupService.deleteGroup(group).then();
                     }
                   } else {
-                    if (group.user1Email == friend.currentUserEmail || group.user2Email == friend.currentUserEmail) {
+                    if (group.user1Email == friend.currentUserPhoneNumber || group.user2Email == friend.currentUserPhoneNumber) {
                       this.groupService.deleteGroup(group).then();
                     }
                   }
