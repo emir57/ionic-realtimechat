@@ -139,7 +139,7 @@ export class HomePage implements OnInit {
               phoneNumber += c == " " ? "" : c;
             }
             this.friendRequestService.checkRequests(this.currentUser.phoneNumber, phoneNumber).subscribe(status => {
-              if (status == true) {
+              if (status == false) {
                 this.friendRequestService.add(Object.assign(
                   {
                     senderUserPhoneNumber: this.currentUser.phoneNumber,
@@ -147,9 +147,8 @@ export class HomePage implements OnInit {
                     status: 0
                   }))
                 this.messageService.showMessage("Arkadaşlık isteği başarıyla gönderildi.")
-              }else{
+              } else {
                 this.messageService.showMessage("Arkadaşlık isteği zaten gönderilmiş")
-
               }
             })
 
