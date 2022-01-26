@@ -33,6 +33,7 @@ export class LoginPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['emir.gurbuz06@hotmail.com', [Validators.required, Validators.email, Validators.maxLength(50)]],
       password: ['123456', [Validators.minLength(6), Validators.required]],
+      phone: ['05462667309', [Validators.minLength(6), Validators.required]],
     })
   }
 
@@ -40,7 +41,7 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
       this.isOk = false;
       let loginModel: LoginModel = this.loginForm.value;
-      this.authService.login(loginModel).then((msg) => {
+      this.authService.loginWithEmail(loginModel).then((msg) => {
         this.userService.getUser(loginModel.email).subscribe(user => {
           localStorage.setItem("user", JSON.stringify(user));
         })
@@ -57,6 +58,23 @@ export class LoginPage implements OnInit {
           this.isOk = true;
         }, 1000);
       })
+    }
+  }
+  loginWithPhone(){
+    if (this.loginForm.valid) {
+      this.authService.loginWithPhone(this.loginForm.get("phone").value).then((confirmationResult)=>{
+        var code = window.prompt("please your code");
+        return confirmationResult.confirm(code);
+      }).then(()=>{
+        this.userService.getUser(this.loginForm.get("phone").value).subscribe(user => {
+          localStorage.setItem("user", JSON.stringify(user));
+        })
+        setTimeout(() => {
+          this.messageService.showMessage("Giriş Başarılı");
+          this.router.navigate(["home"])
+        }, 1300);
+      })
+      .catch((error)=>console.log(error))
     }
   }
 
@@ -82,7 +100,7 @@ export class LoginPage implements OnInit {
         }, {
           text: 'Gönder',
           handler: (value) => {
-            this.authService.resetPassword(value.email).catch(error => {
+            this.authService.resetPasswordWithEmail(value.email).catch(error => {
               let message = this.messageService.GetErrorMessage(error.code)
               this.messageService.showMessage(message);
             })

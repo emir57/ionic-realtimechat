@@ -40,7 +40,7 @@ export class RegisterPage implements OnInit {
     if(this.registerForm.valid){
       this.isOk=false;
       let user:RegisterModel=Object.assign({},this.registerForm.value);
-      this.authService.register(user).then(()=>{
+      this.authService.registerWithEmail(user).then(()=>{
         setTimeout(() => {
           this.messageService.showMessage("Başarıyla Kayıt Olundu");
           this.isOk=true;

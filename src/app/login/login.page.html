@@ -8,6 +8,10 @@
   <div id="container">
     <form [formGroup]="loginForm">
       <ion-item>
+        <ion-label position="floating">Telefon</ion-label>
+        <ion-input type="text" formControlName="phone"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">Eposta</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
@@ -27,9 +31,10 @@
         <div *ngIf="loginForm.get('password').errors.minlength">Şifre en az 6 karakter olabilir</div>
       </div>
     </form>
+    <div id="phone-sign-in-recaptcha"></div>
   </div>
   <div id="buttonContainer">
-    <ion-button [disabled]="!isOk" [disabled]="!loginForm.valid" (click)="login()" color="primary" shape="round">
+    <ion-button [disabled]="!isOk" [disabled]="!loginForm.valid" (click)="loginWithPhone()" color="primary" shape="round">
       <span *ngIf="!isOk" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       &nbsp; <span *ngIf="isOk">Giriş Yap</span>
       &nbsp; <span *ngIf="!isOk">Giriş yapılıyor</span>
