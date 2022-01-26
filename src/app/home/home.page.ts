@@ -151,15 +151,15 @@ export class HomePage implements OnInit {
         this.chatService.getChatsByGroupId(group.id).subscribe(messages => {
           this.groups = [];
           let lastMsg = messages.sort((x, y) => new Date(y.date).getTime() - new Date(x.date).getTime())
-          if (this.currentUser.email === group.user1Email) {
-            this.userService.getUser(group.user2Email).subscribe(user => {
+          if (this.currentUser.email === group.user1PhoneNumber) {
+            this.userService.getUserByPhone(group.user2PhoneNumber).subscribe(user => {
               this.groups.push(Object.assign({
                 user: user, groupName: `${user.firstName} ${user.lastName}`, lastMessage: lastMsg[0]
               }, group));
             })
           }
-          else if (this.currentUser.email === group.user2Email) {
-            this.userService.getUser(group.user1Email).subscribe(user => {
+          else if (this.currentUser.email === group.user2PhoneNumber) {
+            this.userService.getUserByPhone(group.user1PhoneNumber).subscribe(user => {
               this.groups.push(Object.assign({
                 user: user, groupName: `${user.firstName} ${user.lastName}`, lastMessage: lastMsg[0]
               }, group));
