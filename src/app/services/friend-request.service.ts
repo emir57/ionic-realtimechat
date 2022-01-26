@@ -25,13 +25,13 @@ export class FriendRequestService {
   delete(friendRequestModel:FriendRequestModel){
     return this.fireStoreService.collection(this.collectionName).doc(friendRequestModel.id).delete();
   }
-  getRequestsByUser(currentUserEmail:string):Observable<User[]>{
+  getRequestsByUser(currentUserPhoneNumber:string):Observable<User[]>{
     let subject = new Subject<User[]>();
     let users:User[] = [];
     this.fireStoreService.collection<FriendRequestModel>(this.collectionName).get().subscribe(requests=>{
       requests.docs.forEach(request=>{
-        if(request.data().receiveUserEmail===currentUserEmail){
-          this.userService.getUser(request.data().senderUserEmail).subscribe(user=>{
+        if(request.data().receiveUserPhoneNumber===currentUserPhoneNumber){
+          this.userService.getUser(request.data().receiveUserPhoneNumber).subscribe(user=>{
             users.push(user);
           })
         }
@@ -40,12 +40,12 @@ export class FriendRequestService {
     })
     return subject.asObservable();
   }
-  getRequests(currentUserEmail:string):Observable<FriendRequestModel[]>{
+  getRequests(currentUserPhoneNumber:string):Observable<FriendRequestModel[]>{
     let subject = new Subject<FriendRequestModel[]>();
     let returnValues:FriendRequestModel[] = [];
     this.fireStoreService.collection<FriendRequestModel>(this.collectionName).get().subscribe(requests=>{
       requests.docs.forEach(request=>{
-        if(request.data().receiveUserEmail===currentUserEmail){
+        if(request.data().receiveUserPhoneNumber===currentUserPhoneNumber){
           returnValues.push(Object.assign({id:request.id},request.data()));
         }
       })
