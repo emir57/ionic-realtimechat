@@ -69,8 +69,8 @@ export class FriendsRequestPage implements OnInit {
       user2PhoneNumber:request.user.phoneNumber
     })
     this.friendModel = Object.assign({
-      currentUserPhone: this.currentUserPhoneNumber,
-      friendUserPhone: request.user.phoneNumber,
+      currentUserPhoneNumber: this.currentUserPhoneNumber,
+      friendUserPhoneNumber: request.user.phoneNumber,
     })
     this.groupService.createGroup(this.groupModel).then();
     this.friendService.add(this.friendModel).then(() => {
