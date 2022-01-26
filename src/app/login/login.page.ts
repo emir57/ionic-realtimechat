@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['emir.gurbuz06@hotmail.com', [Validators.required, Validators.email, Validators.maxLength(50)]],
       password: ['123456', [Validators.minLength(6), Validators.required]],
-      phone: ['05462667309', [Validators.minLength(6), Validators.required]],
+      phone: ['+90', [Validators.minLength(6), Validators.required]],
     })
   }
 
