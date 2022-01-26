@@ -63,8 +63,16 @@ export class LoginPage implements OnInit {
   }
   async loginWithPhone() {
     if (this.loginForm.valid) {
-      this.isOk=false;
-      let phoneNumber = this.loginForm.get("phone").value;
+      this.isOk = false;
+      let getPhoneNumber = this.loginForm.get("phone").value;
+      let phoneNumber = "";
+      if (!getPhoneNumber.startsWith("+90")) {
+        phoneNumber = "+90";
+      }
+      for (let i = 0; i < getPhoneNumber.length; i++) {
+        const c = getPhoneNumber[i];
+        phoneNumber += c == " " ? "" : c;
+      }
       this.authService.loginWithPhone(phoneNumber)
         .then(async (confirmationResult) => {
           // var code = window.prompt("please your code");
@@ -72,29 +80,29 @@ export class LoginPage implements OnInit {
           var code = await this.GetCode();
           code.subscribe(code => {
             return confirmationResult.confirm(code)
-            .then(() => {
-              this.userService.checkUserByPhone(phoneNumber).subscribe(status=>{
-                if(status==false){
-                  let user = Object.assign({
-                    firstName:phoneNumber,
-                    lastName:"",
-                    email:"",
-                    profileUrl:"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==",
-                    phoneNumber:phoneNumber
-                  })
-                  this.userService.addUser(user).then(()=>{
-                    localStorage.setItem("user", JSON.stringify(user));
-                  })
-                }
-              })
-              this.userService.getUserByPhone(phoneNumber).subscribe(user => {
-                localStorage.setItem("user", JSON.stringify(user));
-              })
-              setTimeout(() => {
-                this.messageService.showMessage("Giriş Başarılı");
-                this.router.navigate(["home"])
-              }, 1300);
-            });
+              .then(() => {
+                this.userService.checkUserByPhone(phoneNumber).subscribe(status => {
+                  if (status == false) {
+                    let user = Object.assign({
+                      firstName: phoneNumber,
+                      lastName: "",
+                      email: "",
+                      profileUrl: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==",
+                      phoneNumber: phoneNumber
+                    })
+                    this.userService.addUser(user).then(() => {
+                      localStorage.setItem("user", JSON.stringify(user));
+                    })
+                  }
+                })
+                this.userService.getUserByPhone(phoneNumber).subscribe(user => {
+                  localStorage.setItem("user", JSON.stringify(user));
+                })
+                setTimeout(() => {
+                  this.messageService.showMessage("Giriş Başarılı");
+                  this.router.navigate(["home"])
+                }, 1300);
+              });
           })
         })
         .catch((error) => {
