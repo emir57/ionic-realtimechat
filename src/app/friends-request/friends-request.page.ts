@@ -41,7 +41,7 @@ export class FriendsRequestPage implements OnInit {
     // })
     this.friendRequestService.getRequests(this.currentUserPhoneNumber).subscribe(requests => {
       requests.forEach(request => {
-        this.userService.getUser(request.senderUserPhoneNumber).subscribe(user => {
+        this.userService.getUserByPhone(request.senderUserPhoneNumber).subscribe(user => {
           this.users.push(user);
           this.friendRequests.push(Object.assign({ user: user }, request))
         })
@@ -70,7 +70,7 @@ export class FriendsRequestPage implements OnInit {
     })
     this.friendModel = Object.assign({
       currentUserPhone: this.currentUserPhoneNumber,
-      friendUserPhone: request.user.email,
+      friendUserPhone: request.user.phoneNumber,
     })
     this.groupService.createGroup(this.groupModel).then();
     this.friendService.add(this.friendModel).then(() => {
