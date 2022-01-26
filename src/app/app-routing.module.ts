@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'group',
     loadChildren: () => import('./group/group.module').then( m => m.GroupPageModule)
   },
+  {
+    path: 'my-profile',
+    loadChildren: () => import('./my-profile/my-profile.module').then( m => m.MyProfilePageModule)
+  },
 
 ];
 

@@ -87,7 +87,7 @@ export class HomePage implements OnInit {
 
   async showProfile() {
     this.menuController.close("menu")
-
+    this.router.navigate(["my-profile"])
   }
 
   async showFriendsRequest() {
