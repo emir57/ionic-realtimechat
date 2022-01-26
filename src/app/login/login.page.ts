@@ -16,6 +16,8 @@ import { UserService } from '../services/user.service';
 export class LoginPage implements OnInit {
 
   isOk = true;
+  statusRegisterButton=true;
+  statusResetPasswordButton=true;
   loginForm: FormGroup
   constructor(
     private formBuilder: FormBuilder,

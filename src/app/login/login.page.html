@@ -9,7 +9,7 @@
     <div class="alert alert-warning">Hesaplar telefon numarasına göre geçiş yapılmıştır.Epostalı hesaplar silinecektir.</div>
     <form [formGroup]="loginForm">
       <ion-item>
-        <ion-label position="floating">Telefon</ion-label>
+        <ion-label position="floating">Telefon Numarası</ion-label>
         <ion-input type="text" formControlName="phone"></ion-input>
       </ion-item>
       <!-- <ion-item>
@@ -43,12 +43,12 @@
     </ion-button>
   </div>
   <div id="bottomContainer">
-    <ion-button (click)="showResetPasswordBox()" fill="clear">
+    <ion-button [disabled]="statusResetPasswordButton" (click)="showResetPasswordBox()" fill="clear">
       Şifremi Unuttum
     </ion-button>
   </div>
   <div id="bottomContainer">
-    <ion-button routerLink="/register" fill="clear">
+    <ion-button [disabled]="statusRegisterButton" routerLink="/register" fill="clear">
       Hesabım Yok
     </ion-button>
   </div>
