@@ -16,7 +16,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./friends-request.page.scss'],
 })
 export class FriendsRequestPage implements OnInit {
-  @Input() currentUserEmail: string;
+  @Input() currentUserPhoneNumber: string;
 
   isLoad = false;
   searchString: string = "";
@@ -39,7 +39,7 @@ export class FriendsRequestPage implements OnInit {
     // this.friendRequestService.getRequestsByUser(this.currentUserEmail).subscribe(users=>{
     //   this.users = users
     // })
-    this.friendRequestService.getRequests(this.currentUserEmail).subscribe(requests => {
+    this.friendRequestService.getRequests(this.currentUserPhoneNumber).subscribe(requests => {
       requests.forEach(request => {
         this.userService.getUser(request.senderUserPhoneNumber).subscribe(user => {
           this.users.push(user);
@@ -65,12 +65,12 @@ export class FriendsRequestPage implements OnInit {
 
   accept(request: FriendRequestModel) {
     this.groupModel = Object.assign({
-      user1Email:this.currentUserEmail,
-      user2Email:request.user.email
+      user1PhoneNumber:this.currentUserPhoneNumber,
+      user2PhoneNumber:request.user.phoneNumber
     })
     this.friendModel = Object.assign({
-      currentUserEmail: this.currentUserEmail,
-      friendUserEmail: request.user.email,
+      currentUserPhone: this.currentUserPhoneNumber,
+      friendUserPhone: request.user.email,
     })
     this.groupService.createGroup(this.groupModel).then();
     this.friendService.add(this.friendModel).then(() => {
