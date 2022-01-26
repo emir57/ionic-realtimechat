@@ -115,8 +115,8 @@ export class HomePage implements OnInit {
         {
           name: 'phone',
           type: 'text',
-          value:"+90 ",
-          placeholder: '+90 555 555 55 55'
+          value:"",
+          placeholder: '555 555 55 55',
         },
       ],
       buttons: [
@@ -130,12 +130,22 @@ export class HomePage implements OnInit {
         }, {
           text: 'Gönder',
           handler: (value) => {
-            this.friendRequestService.add(Object.assign(
-              {
-                senderUserPhoneNumber: this.currentUser.phoneNumber,
-                receiveUserPhoneNumber: value.phone,
-                status: 0
-              }))
+            let phoneNumber="";
+            if(!value.phone.startsWith("+90")){
+              phoneNumber="+90";
+            }
+            console.log("+90"+value.phone)
+            for (let i = 0; i < value.phone.length; i++) {
+              const c = value.phone[i];
+              phoneNumber+=c==" "?"":c;
+            }
+            console.log(phoneNumber)
+            // this.friendRequestService.add(Object.assign(
+            //   {
+            //     senderUserPhoneNumber: this.currentUser.phoneNumber,
+            //     receiveUserPhoneNumber: value.phone,
+            //     status: 0
+            //   }))
             this.messageService.showMessage("Arkadaşlık isteği başarıyla gönderildi.")
           }
         }
