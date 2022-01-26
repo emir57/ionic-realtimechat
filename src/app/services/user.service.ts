@@ -34,6 +34,19 @@ export class UserService {
     })
     return subject.asObservable();
   }
+  chackUserByPhone(phoneNumber:string):Observable<boolean>{
+    let subject = new Subject<boolean>();
+    let status = false;
+    this.fireStore.collection<User>(this.collectionName).get().subscribe(users=>{
+      users.forEach(user=>{
+        if(user.data().phoneNumber===phoneNumber){
+          status = true;
+        }
+      })
+      return subject.next(status);
+    })
+    return subject.asObservable();
+  }
   getUserByPhone(phoneNumber:string):Observable<User>{
     let subject = new Subject<User>();
     this.fireStore.collection<User>(this.collectionName).get().subscribe(users=>{

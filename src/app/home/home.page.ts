@@ -138,19 +138,18 @@ export class HomePage implements OnInit {
               const c = value.phone[i];
               phoneNumber += c == " " ? "" : c;
             }
-            this.friendRequestService.checkRequests(this.currentUser.phoneNumber, phoneNumber).subscribe(status => {
-              if (status == false) {
-                this.friendRequestService.add(Object.assign(
-                  {
-                    senderUserPhoneNumber: this.currentUser.phoneNumber,
-                    receiveUserPhoneNumber: phoneNumber,
-                    status: 0
-                  }))
-                this.messageService.showMessage("Arkadaşlık isteği başarıyla gönderildi.")
-              } else {
-                this.messageService.showMessage("Arkadaşlık isteği zaten gönderilmiş")
-              }
-            })
+            if(this.currentUser.phoneNumber == phoneNumber){
+              this.messageService.showMessage("Kendi numaranızı giremezsiniz.")
+            }
+            else{
+              this.friendRequestService.add(Object.assign(
+                {
+                  senderUserPhoneNumber: this.currentUser.phoneNumber,
+                  receiveUserPhoneNumber: phoneNumber,
+                  status: 0
+                }))
+              this.messageService.showMessage("Arkadaşlık isteği başarıyla gönderildi.")
+            }
 
           }
         }
