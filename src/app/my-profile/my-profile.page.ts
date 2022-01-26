@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
+import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class MyProfilePage implements OnInit {
   constructor(
     private router:Router,
     private formBuilder:FormBuilder,
-    private userService:UserService
+    private userService:UserService,
+    private messageService:MessageService
   ) { }
 
   ngOnInit() {
@@ -27,10 +29,26 @@ export class MyProfilePage implements OnInit {
 
   createUpdateForm(){
     this.updateForm = this.formBuilder.group({
+      id:[this.currentUser.id],
       firstName:[this.currentUser.firstName,[Validators.maxLength(20)]],
       lastName:[this.currentUser.lastName,[Validators.maxLength(20)]],
       email:[this.currentUser.email,[Validators.email]]
     })
+  }
+  update(){
+    if(this.updateForm.valid){
+      let user = Object.assign({},this.updateForm.value);
+      this.userService.updateUser(user).then(()=>{
+        localStorage.setItem("user",JSON.stringify(user));
+        this.messageService.showMessage("Güncelleniyor");
+        setTimeout(() => {
+          this.messageService.showMessage("Başarıyla güncellendi.");
+        }, 500);
+        setTimeout(() => {
+          this.router.navigate(["home"]);
+        }, 1000);
+      })
+    }
   }
 
 }
