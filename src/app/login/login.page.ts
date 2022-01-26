@@ -79,7 +79,7 @@ export class LoginPage implements OnInit {
                     firstName:phoneNumber,
                     lastName:"",
                     email:"",
-                    profileUrl:"",
+                    profileUrl:"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==",
                     phoneNumber:phoneNumber
                   })
                   this.userService.addUser(user).then(()=>{})
