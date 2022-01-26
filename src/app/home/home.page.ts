@@ -134,18 +134,16 @@ export class HomePage implements OnInit {
             if(!value.phone.startsWith("+90")){
               phoneNumber="+90";
             }
-            console.log("+90"+value.phone)
             for (let i = 0; i < value.phone.length; i++) {
               const c = value.phone[i];
               phoneNumber+=c==" "?"":c;
             }
-            console.log(phoneNumber)
-            // this.friendRequestService.add(Object.assign(
-            //   {
-            //     senderUserPhoneNumber: this.currentUser.phoneNumber,
-            //     receiveUserPhoneNumber: value.phone,
-            //     status: 0
-            //   }))
+            this.friendRequestService.add(Object.assign(
+              {
+                senderUserPhoneNumber: this.currentUser.phoneNumber,
+                receiveUserPhoneNumber: phoneNumber,
+                status: 0
+              }))
             this.messageService.showMessage("Arkadaşlık isteği başarıyla gönderildi.")
           }
         }
