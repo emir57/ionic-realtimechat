@@ -2,8 +2,8 @@ import { User } from "./user";
 
 export interface FriendRequestModel{
   id?:string;
-  senderUserEmail:string;
-  receiveUserEmail:string;
+  senderUserPhoneNumber:string;
+  receiveUserPhoneNumber:string;
   status:number;
   user?:User
 }
