@@ -11,7 +11,7 @@
         <ion-label position="floating">Telefon</ion-label>
         <ion-input type="text" formControlName="phone"></ion-input>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="floating">Eposta</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
@@ -24,7 +24,7 @@
       <ion-item>
         <ion-label position="floating">Şifre</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
-      </ion-item>
+      </ion-item> -->
       <div class="text-danger"
         *ngIf="(loginForm.get('password').dirty || loginForm.get('password').touched) && loginForm.get('password').errors">
         <div *ngIf="loginForm.get('password').errors.required">Şifre Gerekli</div>
