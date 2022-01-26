@@ -12,6 +12,7 @@ import { UserService } from '../services/user.service';
 })
 export class MyProfilePage implements OnInit {
 
+  isOk=true;
   currentUser:User
   updateForm:FormGroup
   constructor(
@@ -37,6 +38,7 @@ export class MyProfilePage implements OnInit {
   }
   update(){
     if(this.updateForm.valid){
+      this.isOk=false;
       let user = Object.assign({},this.updateForm.value);
       this.userService.updateUser(user).then(()=>{
         localStorage.setItem("user",JSON.stringify(user));

@@ -27,8 +27,11 @@
         <ion-input type="text" formControlName="email"></ion-input>
       </ion-item>
     </form>
-    <ion-button (click)="update()" shape="round">
-      Güncelle
+    <ion-button [disabled]="!isOk" (click)="update()" shape="round">
+      <span *ngIf="!isOk" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      &nbsp;
+      <span *ngIf="isOk">Güncelle</span>
+      <span *ngIf="!isOk">Güncelleniyor</span>
     </ion-button>
   </div>
 
