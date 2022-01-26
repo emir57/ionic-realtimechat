@@ -31,12 +31,12 @@ export class FriendsPage implements OnInit {
     this.friendService.getFriends(this.currentUserPhoneNumber).subscribe(friends => {
       friends.forEach(friend => {
         if (this.currentUserPhoneNumber == friend.currentUserPhoneNumber) {
-          this.userService.getUser(friend.friendUserPhoneNumber).subscribe(user => {
+          this.userService.getUserByPhone(friend.friendUserPhoneNumber).subscribe(user => {
             this.friends.push(Object.assign({ user: user }, friend));
           })
         }
         if (this.currentUserPhoneNumber == friend.friendUserPhoneNumber) {
-          this.userService.getUser(friend.currentUserPhoneNumber).subscribe(user => {
+          this.userService.getUserByPhone(friend.currentUserPhoneNumber).subscribe(user => {
             this.friends.push(Object.assign({ user: user }, friend));
           })
         }
