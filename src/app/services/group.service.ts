@@ -34,7 +34,7 @@ export class GroupService {
     this.db.list<GroupModel>(this.collectionName).valueChanges().subscribe(values=>{
       returnValues=[];
       values.forEach(group=>{
-        if(group.user1Email == userEmail || group.user2Email == userEmail){
+        if(group.user1PhoneNumber == userEmail || group.user2PhoneNumber == userEmail){
           returnValues.push(group);
         }
       })

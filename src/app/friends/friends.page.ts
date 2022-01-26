@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./friends.page.scss'],
 })
 export class FriendsPage implements OnInit {
-  @Input() currentUserEmail: string;
+  @Input() currentUserPhoneNumber: string;
 
   searchString: string = "";
   friends: FriendModel[] = [];
@@ -28,15 +28,15 @@ export class FriendsPage implements OnInit {
 
   ngOnInit() {
     this.isLoad = true;
-    this.friendService.getFriends(this.currentUserEmail).subscribe(friends => {
+    this.friendService.getFriends(this.currentUserPhoneNumber).subscribe(friends => {
       friends.forEach(friend => {
-        if (this.currentUserEmail == friend.currentUserEmail) {
-          this.userService.getUser(friend.friendUserEmail).subscribe(user => {
+        if (this.currentUserPhoneNumber == friend.currentUserPhoneNumber) {
+          this.userService.getUser(friend.friendUserPhoneNumber).subscribe(user => {
             this.friends.push(Object.assign({ user: user }, friend));
           })
         }
-        if (this.currentUserEmail == friend.friendUserEmail) {
-          this.userService.getUser(friend.currentUserEmail).subscribe(user => {
+        if (this.currentUserPhoneNumber == friend.friendUserPhoneNumber) {
+          this.userService.getUser(friend.currentUserPhoneNumber).subscribe(user => {
             this.friends.push(Object.assign({ user: user }, friend));
           })
         }
@@ -65,14 +65,14 @@ export class FriendsPage implements OnInit {
           text: 'Çıkar',
           handler: () => {
             this.friendService.delete(friend).then(() => {
-              this.groupService.getGroups(this.currentUserEmail).subscribe(groups => {
+              this.groupService.getGroups(this.currentUserPhoneNumber).subscribe(groups => {
                 groups.forEach(group => {
-                  if (friend.currentUserPhoneNumber == this.currentUserEmail) {
-                    if (group.user1Email == friend.friendUserPhoneNumber || group.user2Email == friend.friendUserPhoneNumber) {
+                  if (friend.currentUserPhoneNumber == this.currentUserPhoneNumber) {
+                    if (group.user1PhoneNumber == friend.friendUserPhoneNumber || group.user2PhoneNumber == friend.friendUserPhoneNumber) {
                       this.groupService.deleteGroup(group).then();
                     }
                   } else {
-                    if (group.user1Email == friend.currentUserPhoneNumber || group.user2Email == friend.currentUserPhoneNumber) {
+                    if (group.user1PhoneNumber == friend.currentUserPhoneNumber || group.user2PhoneNumber == friend.currentUserPhoneNumber) {
                       this.groupService.deleteGroup(group).then();
                     }
                   }
