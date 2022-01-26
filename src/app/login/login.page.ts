@@ -83,7 +83,7 @@ export class LoginPage implements OnInit {
                     phoneNumber:phoneNumber
                   })
                   this.userService.addUser(user).then(()=>{
-
+                    localStorage.setItem("user", JSON.stringify(user));
                   })
                 }
               })
