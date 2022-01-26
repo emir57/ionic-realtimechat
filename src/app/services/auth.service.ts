@@ -14,10 +14,10 @@ export class AuthService {
     private userService:UserService
   ) { }
 
-  login(loginModel:LoginModel){
+  loginWithEmail(loginModel:LoginModel){
     return this.authService.signInWithEmailAndPassword(loginModel.email,loginModel.password);
   }
-  register(registerModel:RegisterModel){
+  registerWithEmail(registerModel:RegisterModel){
     return this.authService.createUserWithEmailAndPassword(registerModel.email,registerModel.password).then(()=>{
       this.userService.addUser(registerModel)
     })
