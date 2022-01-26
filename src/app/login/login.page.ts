@@ -82,7 +82,9 @@ export class LoginPage implements OnInit {
                     profileUrl:"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==",
                     phoneNumber:phoneNumber
                   })
-                  this.userService.addUser(user).then(()=>{})
+                  this.userService.addUser(user).then(()=>{
+
+                  })
                 }
               })
               this.userService.getUserByPhone(phoneNumber).subscribe(user => {
@@ -96,7 +98,6 @@ export class LoginPage implements OnInit {
           })
         })
         .catch((error) => {
-          this.messageService.showMessage(error)
           this.messageService.showMessage(this.messageService.GetErrorMessage(error.code))
         })
     }
@@ -138,12 +139,12 @@ export class LoginPage implements OnInit {
   async GetCode(): Promise<Observable<string>> {
     let subject = new Subject<string>();
     const alert = await this.alertController.create({
-      header: 'Prompt!',
+      header: 'Telefon numaranıza gelen doğrulama kodunu giriniz.',
       inputs: [
         {
           name: 'name1',
           type: 'text',
-          placeholder: 'Placeholder 1'
+          placeholder: 'Doğrulama Kodu'
         },
       ],
       buttons: [
