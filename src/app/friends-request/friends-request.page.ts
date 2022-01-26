@@ -41,7 +41,7 @@ export class FriendsRequestPage implements OnInit {
     // })
     this.friendRequestService.getRequests(this.currentUserEmail).subscribe(requests => {
       requests.forEach(request => {
-        this.userService.getUser(request.senderUserEmail).subscribe(user => {
+        this.userService.getUser(request.senderUserPhoneNumber).subscribe(user => {
           this.users.push(user);
           this.friendRequests.push(Object.assign({ user: user }, request))
         })
