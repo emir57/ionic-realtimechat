@@ -110,12 +110,13 @@ export class HomePage implements OnInit {
   async sendFriendRequest() {
     this.menuController.close("menu");
     const alert = await this.alertController.create({
-      header: 'Arkadaşınızın Eposta Adresini Giriniz',
+      header: 'Arkadaşınızın Telefon Numarasını Giriniz',
       inputs: [
         {
-          name: 'email',
-          type: 'email',
-          placeholder: 'email@example.com'
+          name: 'phone',
+          type: 'text',
+          value:"+90 ",
+          placeholder: '+90 555 555 55 55'
         },
       ],
       buttons: [
@@ -131,8 +132,8 @@ export class HomePage implements OnInit {
           handler: (value) => {
             this.friendRequestService.add(Object.assign(
               {
-                senderUserEmail: this.currentUser.email,
-                receiveUserEmail: value.email,
+                senderUserPhoneNumber: this.currentUser.phoneNumber,
+                receiveUserPhoneNumber: value.phone,
                 status: 0
               }))
             this.messageService.showMessage("Arkadaşlık isteği başarıyla gönderildi.")
