@@ -21,7 +21,7 @@
   <!-- Message Div -->
   <div id="messageDiv">
     <div *ngFor="let chat of chats">
-      <div *ngIf="chat.user.email==currentUser.email">
+      <div *ngIf="chat.user.phoneNumber==currentUser.phoneNumber">
         <div class="messageBoxUser messageBoxGlobal">
           <div class="username text-white">Ben</div>
           {{chat.text}}
@@ -29,7 +29,7 @@
         </div>
         <div class="spaceDiv"></div>
       </div>
-      <div *ngIf="chat.user.email!=currentUser.email">
+      <div *ngIf="chat.user.phoneNumber!=currentUser.phoneNumber">
         <div class="messageBox messageBoxGlobal">
           <div class="username text-white">{{chat.user.firstName}} {{chat.user.lastName}}</div>
           {{chat.text}}
