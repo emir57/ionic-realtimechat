@@ -20,7 +20,6 @@ export class GroupPage implements OnInit {
     private modalController: ModalController,
     private chatService: ChatService,
   ) {
-
   }
 
   ngOnInit() {
@@ -39,6 +38,7 @@ export class GroupPage implements OnInit {
     });
     this.chatService.add(message)
     this.message = "";
+    this.setScrollPosition();
   }
 
   getMessages() {

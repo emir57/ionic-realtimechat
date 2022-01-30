@@ -29,6 +29,7 @@ export class FriendsPage implements OnInit {
   ngOnInit() {
     this.isLoad = true;
     this.friendService.getFriends(this.currentUserPhoneNumber).subscribe(friends => {
+      this.friends=[];
       friends.forEach(friend => {
         if (this.currentUserPhoneNumber == friend.currentUserPhoneNumber) {
           this.userService.getUserByPhone(friend.friendUserPhoneNumber).subscribe(user => {
