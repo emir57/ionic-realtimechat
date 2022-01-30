@@ -31,14 +31,16 @@ export class GroupPage implements OnInit {
   }
 
   sendMessage() {
-    let message = Object.assign({
-      text: this.message,
-      groupId: this.group.id,
-      user: this.currentUser
-    });
-    this.chatService.add(message)
-    this.message = "";
-    this.setScrollPosition();
+    if(this.message || this.message.trim()){
+      let message = Object.assign({
+        text: this.message,
+        groupId: this.group.id,
+        user: this.currentUser
+      });
+      this.chatService.add(message)
+      this.message = "";
+      this.setScrollPosition();
+    }
   }
 
   getMessages() {

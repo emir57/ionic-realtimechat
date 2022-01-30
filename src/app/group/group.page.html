@@ -31,7 +31,10 @@
       </div>
       <div *ngIf="chat.user.phoneNumber!=currentUser.phoneNumber">
         <div class="messageBox messageBoxGlobal">
-          <div class="username text-white">{{chat.user.firstName}} {{chat.user.lastName}}</div>
+          <div class="username text-white">
+            <span *ngIf="chat.user.firstName.length>10">{{chat.user.firstName.substring(0,10)}}</span>
+            <span *ngIf="!(chat.user.firstName.length>10)">{{chat.user.firstName}}</span>
+          </div>
           {{chat.text}}
           <div class="messageBoxDate text-white">{{getDate(chat.date)}}</div>
         </div>
@@ -43,7 +46,8 @@
   <div id="bottomBar">
     <div class="row">
       <div class="col-10">
-        <input id="messageInput" class="form-control" [(ngModel)]="message" type="text">
+        <ion-input class="form-control" (keyup.enter)="sendMessage()" [(ngModel)]="message"></ion-input>
+        <!-- <input id="messageInput" class="form-control" [(ngModel)]="message" type="text"> -->
       </div>
       <div class="col-2">
         <button [disabled]="!message || !message.trim()" id="sendButton" (click)="sendMessage()">
