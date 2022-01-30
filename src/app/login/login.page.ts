@@ -7,7 +7,7 @@ import { LoginModel } from '../models/loginModel';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
-
+import { $ } from "jquery";
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -30,6 +30,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.createLoginForm();
+
   }
 
   createLoginForm() {
