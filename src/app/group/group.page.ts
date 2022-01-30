@@ -31,7 +31,9 @@ export class GroupPage implements OnInit {
   }
 
   sendMessage() {
-    if(this.message || this.message.trim()){
+    this.message = this.message.trim();
+    if(this.message.length>=1){
+
       let message = Object.assign({
         text: this.message,
         groupId: this.group.id,
