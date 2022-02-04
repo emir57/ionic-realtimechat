@@ -59,10 +59,20 @@ body{
   width: 100%;
 }
 #sendButton{
+  padding: 0;
   width: 100%;
   height: 100%;
   margin-right:3%;
   background-color: #2E86C1;
+  font-size: x-large;
+}
+#emojiButton{
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  margin-right:3%;
+  background-color: #F4D03F;
+  font-size: xx-large;
 }
 .username{
   width: 100%;
