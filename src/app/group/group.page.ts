@@ -58,7 +58,6 @@ export class GroupPage implements OnInit {
   sendMessage() {
     this.message = this.message.trim();
     if (this.message.length >= 1) {
-
       let message = Object.assign({
         text: this.message,
         groupId: this.group.id,
@@ -67,6 +66,8 @@ export class GroupPage implements OnInit {
       this.chatService.add(message)
       this.message = "";
       this.setScrollPosition();
+      $("#emojisBackground").hide();
+      $("#emojis").hide();
     }
   }
 
