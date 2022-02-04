@@ -25,7 +25,7 @@
         <div class="messageBoxUser messageBoxGlobal">
           <div class="username usernameUser">Ben</div>
           {{chat.text}}
-          <div class="messageBoxDate text-black">{{getDate(chat.date)}}</div>
+          <div class="messageBoxDate messageBoxDateUser">{{getDate(chat.date)}}</div>
         </div>
         <div class="spaceDiv"></div>
       </div>
@@ -37,7 +37,7 @@
             <span *ngIf="!(chat.user.firstName.length>10)">{{chat.user.firstName}}</span>
           </div>
           {{chat.text}}
-          <div class="messageBoxDate text-white">{{getDate(chat.date)}}</div>
+          <div class="messageBoxDate messageBoxDateSender text-white">{{getDate(chat.date)}}</div>
         </div>
         <div class="spaceDiv"></div>
       </div>
