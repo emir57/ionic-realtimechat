@@ -70,10 +70,11 @@
     <ion-label slot="">
       {{group.user.firstName}} {{group.user.lastName}}
     </ion-label>
-    <ion-label>
-      <span *ngIf="group.lastMessage">
+    <ion-label *ngIf="group.lastMessage">
+      <span>
         {{group.lastMessage.text}}
-      </span> <span style="float:right;font-size: small;">{{getDate(group.lastMessage.date)}}</span>
+      </span>
+      <span style="float:right;font-size: small;">{{getDate(group.lastMessage.date)}}</span>
     </ion-label>
   </ion-item>
 </ion-content>
