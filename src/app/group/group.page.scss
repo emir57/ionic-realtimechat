@@ -88,3 +88,11 @@ body{
   color: #2E86C1;
   border-bottom: 1px solid #2E86C1;
 }
+
+#emojis{
+  z-index: 200;
+  position: absolute;
+  background-color: black;
+  width: 50%;
+  height: 35%;
+}
