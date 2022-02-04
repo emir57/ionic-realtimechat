@@ -88,7 +88,15 @@ body{
   color: #2E86C1;
   border-bottom: 1px solid #2E86C1;
 }
-
+#emojisBackground{
+  display: none;
+  z-index: 199;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: black;
+  opacity: 0.6;
+}
 #emojis{
   display: none;
   overflow-y: auto;

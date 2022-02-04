@@ -25,6 +25,11 @@ export class GroupPage implements OnInit {
   }
 
   ngOnInit() {
+    var emojisBackground = $("#emojisBackground");
+    emojisBackground.click(function(){
+      $("#emojis").fadeOut();
+      $(this).hide();
+    })
     var emojisDiv = document.getElementById("emojis");
     var input = document.getElementById("input")
     this.emoji.forEach((e,i) => {
@@ -35,7 +40,6 @@ export class GroupPage implements OnInit {
     });
     this.emoji.forEach((e,i)=>{
       document.getElementById("emoji"+i).addEventListener("click",function(){
-        console.log(e)
         $("#input").val($("#input").val()+e)
       })
     })
@@ -43,6 +47,7 @@ export class GroupPage implements OnInit {
     this.setScrollPosition();
   }
   showEmojis(){
+    $("#emojisBackground").show();
     $("#emojis").fadeToggle();
   }
   dismiss() {
