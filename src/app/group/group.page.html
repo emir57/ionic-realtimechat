@@ -23,7 +23,7 @@
     <div *ngFor="let chat of chats">
       <div *ngIf="chat.user.phoneNumber==currentUser.phoneNumber">
         <div class="messageBoxUser messageBoxGlobal">
-          <div class="username usernameUser text-black">Ben</div>
+          <div class="username usernameUser">Ben</div>
           {{chat.text}}
           <div class="messageBoxDate text-black">{{getDate(chat.date)}}</div>
         </div>
