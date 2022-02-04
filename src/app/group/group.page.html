@@ -46,11 +46,16 @@
   <!-- Message Div End-->
   <div id="bottomBar">
     <div class="row">
-      <div class="col-10">
+      <div class="col-8 p-0">
         <ion-input class="form-control" (keyup.enter)="sendMessage()" [(ngModel)]="message"></ion-input>
         <!-- <input id="messageInput" class="form-control" [(ngModel)]="message" type="text"> -->
       </div>
-      <div class="col-2">
+      <div class="col-2 p-0">
+        <button [disabled]="!message || !message.trim()" id="sendButton" (click)="sendMessage()">
+          <ion-icon name="send-outline"></ion-icon>
+        </button>
+      </div>
+      <div class="col-2 p-0">
         <button [disabled]="!message || !message.trim()" id="sendButton" (click)="sendMessage()">
           <ion-icon name="send-outline"></ion-icon>
         </button>
