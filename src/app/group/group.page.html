@@ -23,15 +23,16 @@
     <div *ngFor="let chat of chats">
       <div *ngIf="chat.user.phoneNumber==currentUser.phoneNumber">
         <div class="messageBoxUser messageBoxGlobal">
-          <div class="username text-white">Ben</div>
+          <div class="username usernameUser text-black">Ben</div>
           {{chat.text}}
-          <div class="messageBoxDate text-white">{{getDate(chat.date)}}</div>
+          <div class="messageBoxDate text-black">{{getDate(chat.date)}}</div>
         </div>
         <div class="spaceDiv"></div>
       </div>
+
       <div *ngIf="chat.user.phoneNumber!=currentUser.phoneNumber">
         <div class="messageBox messageBoxGlobal">
-          <div class="username text-white">
+          <div class="username usernameSender text-white">
             <span *ngIf="chat.user.firstName.length>10">{{chat.user.firstName.substring(0,10)}}</span>
             <span *ngIf="!(chat.user.firstName.length>10)">{{chat.user.firstName}}</span>
           </div>

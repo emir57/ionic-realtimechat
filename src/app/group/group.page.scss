@@ -38,6 +38,8 @@
   display: block;
 }
 .messageBoxUser{
+  background-color: white;
+  color: black;
   float: right;
   margin-right: 1%;
 }
@@ -55,5 +57,10 @@
   position: absolute;
   top: 0;
   left: 1%;
+}
+.usernameSender{
   border-bottom: 1px solid white;
+}
+.usernameUser{
+  border-bottom: 1px solid black;
 }
