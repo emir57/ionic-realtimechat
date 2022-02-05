@@ -17,10 +17,10 @@ import { ProfileUrls } from '../models/profileUrls';
 export class LoginPage implements OnInit {
 
   isOk = true;
-  statusRegisterButton=true;
-  statusResetPasswordButton=true;
+  statusRegisterButton = true;
+  statusResetPasswordButton = true;
   loginForm: FormGroup;
-  profileUrl:any[]=ProfileUrls
+  profileUrl: any[] = ProfileUrls
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -87,22 +87,26 @@ export class LoginPage implements OnInit {
             return confirmationResult.confirm(code)
               .then(() => {
                 this.userService.checkUserByPhone(phoneNumber).subscribe(status => {
-                  if (status == false) {
-                    let user = Object.assign({
-                      firstName: phoneNumber,
-                      lastName: "",
-                      email: "",
-                      profileUrl: this.profileUrl[0].url,
-                      phoneNumber: phoneNumber
-                    })
-                    this.userService.addUser(user).then(() => {
-                      localStorage.setItem("user", JSON.stringify(user));
-                    })
-                  }
+                  this.userService.getUserByPhone(phoneNumber).subscribe(getUser => {
+                    if (status == false) {
+                      let user = Object.assign({
+                        id:getUser.id,
+                        firstName: phoneNumber,
+                        lastName: "",
+                        email: "",
+                        profileUrl: this.profileUrl[0].url,
+                        phoneNumber: phoneNumber
+                      })
+                      this.userService.addUser(user).then(() => {
+                        localStorage.setItem("user", JSON.stringify(user));
+                      })
+                    }else{
+                      localStorage.setItem("user", JSON.stringify(getUser));
+                    }
+                  })
                 })
-                this.userService.getUserByPhone(phoneNumber).subscribe(user => {
-                  localStorage.setItem("user", JSON.stringify(user));
-                })
+
+
                 setTimeout(() => {
                   this.messageService.showMessage("Giriş Başarılı");
                   this.router.navigate(["home"])
