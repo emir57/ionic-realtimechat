@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProfileUrls } from '../models/profileUrls';
 import { User } from '../models/user';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
@@ -15,7 +16,7 @@ export class MyProfilePage implements OnInit {
   isOk=true;
   currentUser:User
   updateForm:FormGroup
-  profileUrls:string[]=ProfileUrls
+  profileUrls:any[]=ProfileUrls
   constructor(
     private router:Router,
     private formBuilder:FormBuilder,
