@@ -32,10 +32,6 @@
             <ion-label ><img width="40" style="border-radius: 50%;" [src]="photo.url" alt=""></ion-label>
             <ion-radio [id]="photo.id" [value]="photo.url" color="primary"></ion-radio>
           </ion-item>
-          <ion-item *ngFor="let photo of profileUrls">
-            <ion-label ><img width="40" style="border-radius: 50%;" [src]="photo.url" alt=""></ion-label>
-            <ion-radio [id]="photo.id" [value]="photo.url" color="primary"></ion-radio>
-          </ion-item>
         </ion-radio-group>
       </ion-list>
       <!-- <ion-item>
