@@ -26,6 +26,26 @@
         <ion-label position="floating">Eposta</ion-label>
         <ion-input type="text" formControlName="email"></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label for="1"><img width="40" style="border-radius: 50%;" [src]="currentUser.profileUrl" alt=""></ion-label>
+        <ion-checkbox formControlName="profileUrl" id="1" color="primary"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label for="2"><img width="40" style="border-radius: 50%;" [src]="currentUser.profileUrl" alt=""></ion-label>
+        <ion-checkbox formControlName="profileUrl" id="2" color="primary"></ion-checkbox>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-label>Profil Fotoğrafı</ion-label>
+        <ion-select value="brown" okText="Seç" cancelText="İptal">
+          <ion-select-option value="brown">
+            <img style="border-radius: 50%;" [src]="currentUser.profileUrl" alt=""> Brown
+          </ion-select-option>
+          <ion-select-option value="blonde">Blonde</ion-select-option>
+          <ion-select-option value="black">Black</ion-select-option>
+          <ion-select-option value="red">Red</ion-select-option>
+        </ion-select>
+      </ion-item> -->
     </form>
     <ion-button [disabled]="!isOk" (click)="update()" shape="round">
       <span *ngIf="!isOk" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

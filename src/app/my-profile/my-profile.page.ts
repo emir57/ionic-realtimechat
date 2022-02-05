@@ -34,7 +34,8 @@ export class MyProfilePage implements OnInit {
       firstName:[this.currentUser.firstName,[Validators.maxLength(20)]],
       lastName:[this.currentUser.lastName,[Validators.maxLength(20)]],
       phoneNumber:[this.currentUser.phoneNumber],
-      email:[this.currentUser.email,[Validators.email]]
+      email:[this.currentUser.email,[Validators.email]],
+      profileUrl:[""]
     })
   }
   update(){
