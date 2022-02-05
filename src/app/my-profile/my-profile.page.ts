@@ -15,6 +15,7 @@ export class MyProfilePage implements OnInit {
   isOk=true;
   currentUser:User
   updateForm:FormGroup
+  profileUrls:string[]=ProfileUrls
   constructor(
     private router:Router,
     private formBuilder:FormBuilder,
