@@ -20,7 +20,11 @@
 <ion-menu side="start" menuId="menu">
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title>{{currentUser.firstName}} {{currentUser.lastName}}</ion-title>
+      <ion-title>
+        <img width="40" height="40" style="border-radius: 50%;" [src]="currentUser.profileUrl" alt="">
+        &nbsp;
+        {{currentUser.firstName}} {{currentUser.lastName}}
+      </ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
@@ -65,7 +69,7 @@
 <ion-content [fullscreen]="true">
   <ion-item *ngFor="let group of groups" (click)="showGroupChatModal(group)" detail>
     <ion-avatar slot="start">
-      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+      <img [src]="group.user.profileUrl">
     </ion-avatar>
     <ion-label slot="">
       {{group.user.firstName}} {{group.user.lastName}}
