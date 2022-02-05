@@ -41,23 +41,21 @@ export class MyProfilePage implements OnInit {
     })
   }
   update(){
-    let user = Object.assign({},this.updateForm.value);
-    console.log(user)
-    // if(this.updateForm.valid){
-    //   this.isOk=false;
-    //   let user = Object.assign({},this.updateForm.value);
-    //   this.userService.updateUser(user).then(()=>{
-    //     localStorage.setItem("user",JSON.stringify(user));
-    //     this.messageService.showMessage("Güncelleniyor");
-    //     setTimeout(() => {
-    //       this.router.navigate(["home"]);
-    //     }, 500);
-    //     setTimeout(() => {
-    //       this.messageService.showMessage("Başarıyla güncellendi.");
-    //       window.location.reload();
-    //     }, 500);
-    //   })
-    // }
+    if(this.updateForm.valid){
+      this.isOk=false;
+      let user = Object.assign({},this.updateForm.value);
+      this.userService.updateUser(user).then(()=>{
+        localStorage.setItem("user",JSON.stringify(user));
+        this.messageService.showMessage("Güncelleniyor");
+        setTimeout(() => {
+          this.router.navigate(["home"]);
+        }, 500);
+        setTimeout(() => {
+          this.messageService.showMessage("Başarıyla güncellendi.");
+          window.location.reload();
+        }, 500);
+      })
+    }
   }
 
 }
