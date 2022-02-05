@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 import { $ } from "jquery";
+import { ProfileUrls } from '../models/profileUrls';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -18,7 +19,8 @@ export class LoginPage implements OnInit {
   isOk = true;
   statusRegisterButton=true;
   statusResetPasswordButton=true;
-  loginForm: FormGroup
+  loginForm: FormGroup;
+  profileUrl:any[]=ProfileUrls
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -90,7 +92,7 @@ export class LoginPage implements OnInit {
                       firstName: phoneNumber,
                       lastName: "",
                       email: "",
-                      profileUrl: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==",
+                      profileUrl: this.profileUrl[0].url,
                       phoneNumber: phoneNumber
                     })
                     this.userService.addUser(user).then(() => {
