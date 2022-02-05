@@ -35,25 +35,27 @@ export class MyProfilePage implements OnInit {
       lastName:[this.currentUser.lastName,[Validators.maxLength(20)]],
       phoneNumber:[this.currentUser.phoneNumber],
       email:[this.currentUser.email,[Validators.email]],
-      profileUrl:[""]
+      profileUrl:[this.currentUser.profileUrl]
     })
   }
   update(){
-    if(this.updateForm.valid){
-      this.isOk=false;
-      let user = Object.assign({},this.updateForm.value);
-      this.userService.updateUser(user).then(()=>{
-        localStorage.setItem("user",JSON.stringify(user));
-        this.messageService.showMessage("Güncelleniyor");
-        setTimeout(() => {
-          this.router.navigate(["home"]);
-        }, 500);
-        setTimeout(() => {
-          this.messageService.showMessage("Başarıyla güncellendi.");
-          window.location.reload();
-        }, 500);
-      })
-    }
+    let user = Object.assign({},this.updateForm.value);
+    console.log(user)
+    // if(this.updateForm.valid){
+    //   this.isOk=false;
+    //   let user = Object.assign({},this.updateForm.value);
+    //   this.userService.updateUser(user).then(()=>{
+    //     localStorage.setItem("user",JSON.stringify(user));
+    //     this.messageService.showMessage("Güncelleniyor");
+    //     setTimeout(() => {
+    //       this.router.navigate(["home"]);
+    //     }, 500);
+    //     setTimeout(() => {
+    //       this.messageService.showMessage("Başarıyla güncellendi.");
+    //       window.location.reload();
+    //     }, 500);
+    //   })
+    // }
   }
 
 }
