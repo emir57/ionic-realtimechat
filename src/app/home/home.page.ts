@@ -48,8 +48,8 @@ export class HomePage implements OnInit {
     //   console.log(values)
     // })
   }
-  ngOnInit(): void {
-    this.getCurrentUser();
+  async ngOnInit() {
+    await this.getCurrentUser();
     this.getGroups();
   }
 
