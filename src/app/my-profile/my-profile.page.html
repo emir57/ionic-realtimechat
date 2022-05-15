@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title *ngIf="currentUser">
       &nbsp;
       <img width="40" style="border-radius: 50%;" [src]="currentUser.profileUrl">
       {{currentUser.firstName}} {{currentUser.lastName}}
@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
+  <div class="container" *ngIf="currentUser">
     <form [formGroup]="updateForm">
       <ion-item>
         <ion-label position="floating">Ad</ion-label>
