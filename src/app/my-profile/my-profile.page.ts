@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ProfileUrls } from '../models/profileUrls';
 import { User } from '../models/user';
 import { MessageService } from '../services/message.service';
+import { KeyType, StorageService } from '../services/storage.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -13,39 +14,42 @@ import { UserService } from '../services/user.service';
 })
 export class MyProfilePage implements OnInit {
 
-  isOk=true;
-  currentUser:User
-  updateForm:FormGroup
-  profileUrls:any[]=ProfileUrls
+  isOk = true;
+  currentUser: User
+  updateForm: FormGroup
+  profileUrls: any[] = ProfileUrls
   constructor(
-    private router:Router,
-    private formBuilder:FormBuilder,
-    private userService:UserService,
-    private messageService:MessageService
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private messageService: MessageService,
+    private storageService: StorageService
   ) { }
 
-  ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem("user"));;
+  async ngOnInit() {
+    await this.getCurrentUser();
     this.createUpdateForm();
-
+  }
+  async getCurrentUser() {
+    this.currentUser = JSON.parse(await this.storageService.checkName(KeyType.User));
   }
 
-  createUpdateForm(){
+  createUpdateForm() {
     this.updateForm = this.formBuilder.group({
-      id:[this.currentUser.id],
-      firstName:[this.currentUser.firstName,[Validators.maxLength(20)]],
-      lastName:[this.currentUser.lastName,[Validators.maxLength(20)]],
-      phoneNumber:[this.currentUser.phoneNumber],
-      email:[this.currentUser.email,[Validators.email]],
-      profileUrl:[this.currentUser.profileUrl]
+      id: [this.currentUser.id],
+      firstName: [this.currentUser.firstName, [Validators.maxLength(20)]],
+      lastName: [this.currentUser.lastName, [Validators.maxLength(20)]],
+      phoneNumber: [this.currentUser.phoneNumber],
+      email: [this.currentUser.email, [Validators.email]],
+      profileUrl: [this.currentUser.profileUrl]
     })
   }
-  update(){
-    if(this.updateForm.valid){
-      this.isOk=false;
-      let user = Object.assign({},this.updateForm.value);
-      this.userService.updateUser(user).then(()=>{
-        localStorage.setItem("user",JSON.stringify(user));
+  update() {
+    if (this.updateForm.valid) {
+      this.isOk = false;
+      let user = Object.assign({}, this.updateForm.value);
+      this.userService.updateUser(user).then(() => {
+        localStorage.setItem("user", JSON.stringify(user));
         this.messageService.showMessage("Güncelleniyor");
         setTimeout(() => {
           this.router.navigate(["home"]);
