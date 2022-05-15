@@ -5,6 +5,7 @@ import { ChatService } from '../services/chat.service';
 import { Message } from "../models/message";
 import { User } from '../models/user';
 import $ from "jquery";
+import { LoadService } from '../services/load.service';
 @Component({
   selector: 'app-group',
   templateUrl: './group.page.html',
@@ -21,12 +22,13 @@ export class GroupPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private chatService: ChatService,
+    private loadService: LoadService
   ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.emojiSettings();
-    this.getMessages();
+    await this.getMessages();
     this.setScrollPosition();
   }
 
@@ -55,12 +57,14 @@ export class GroupPage implements OnInit {
     }
   }
 
-  getMessages() {
-    this.chatService.getChatsByGroupId(this.group.id).subscribe(chats => {
-      this.chats = chats;
-      this.setScrollPosition();
-      this.isLoad = false;
-    })
+  async getMessages() {
+    await this.loadService.showLoading();
+      this.chatService.getChatsByGroupId(this.group.id).subscribe(async chats => {
+        this.chats = chats;
+        this.setScrollPosition();
+        this.isLoad = false;
+        await this.loadService.closeLoading();
+      })
   }
 
   getDate(dateString: string) {
