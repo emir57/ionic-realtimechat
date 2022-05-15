@@ -15,6 +15,7 @@ import { FriendService } from '../services/friend.service';
 import { GroupService } from '../services/group.service';
 import { LoadService } from '../services/load.service';
 import { MessageService } from '../services/message.service';
+import { KeyType, StorageService } from '../services/storage.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -39,7 +40,8 @@ export class HomePage implements OnInit {
     private userService: UserService,
     private friendService: FriendService,
     private groupService: GroupService,
-    private loadService: LoadService
+    private loadService: LoadService,
+    private storageService: StorageService
   ) {
     let messageModel: Message = Object.assign({ uid: "emir", text: "denemee" })
     // chatService.getChats().subscribe(values => {
@@ -47,8 +49,12 @@ export class HomePage implements OnInit {
     // })
   }
   ngOnInit(): void {
-    this.currentUser = JSON.parse(localStorage.getItem("user"));
+    this.getCurrentUser();
     this.getGroups();
+  }
+
+  async getCurrentUser() {
+    this.currentUser = JSON.parse(await this.storageService.checkName(KeyType.User));
   }
 
   showMenu() {
