@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { GroupModel } from '../models/group';
 import { ChatService } from '../services/chat.service';
@@ -11,7 +11,7 @@ import { LoadService } from '../services/load.service';
   templateUrl: './group.page.html',
   styleUrls: ['./group.page.scss'],
 })
-export class GroupPage implements OnInit {
+export class GroupPage implements OnInit,AfterViewInit {
   @Input() group: GroupModel;
   @Input() currentUser: User;
 
@@ -25,11 +25,13 @@ export class GroupPage implements OnInit {
     private loadService: LoadService
   ) {
   }
+  ngAfterViewInit(): void {
+    this.setScrollPosition();
+  }
 
   async ngOnInit() {
     this.emojiSettings();
     await this.getMessages();
-    this.setScrollPosition();
   }
 
   showEmojis() {
@@ -61,7 +63,7 @@ export class GroupPage implements OnInit {
     await this.loadService.showLoading();
       this.chatService.getChatsByGroupId(this.group.id).subscribe(async chats => {
         this.chats = chats;
-        this.setScrollPosition();
+        // this.setScrollPosition();
         this.isLoad = false;
         await this.loadService.closeLoading();
       })
