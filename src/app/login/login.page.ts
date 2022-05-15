@@ -9,6 +9,7 @@ import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 import { $ } from "jquery";
 import { ProfileUrls } from '../models/profileUrls';
+import { KeyType, StorageService } from '../services/storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -27,7 +28,8 @@ export class LoginPage implements OnInit {
     private messageService: MessageService,
     private authService: AuthService,
     private alertController: AlertController,
-    private userService: UserService
+    private userService: UserService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
@@ -87,21 +89,21 @@ export class LoginPage implements OnInit {
             return confirmationResult.confirm(code)
               .then(() => {
                 this.userService.checkUserByPhone(phoneNumber).subscribe(status => {
-                  this.userService.getUserByPhone(phoneNumber).subscribe(getUser => {
+                  this.userService.getUserByPhone(phoneNumber).subscribe(async getUser => {
                     if (status == false) {
                       let user = Object.assign({
-                        id:getUser.id,
+                        id: getUser.id,
                         firstName: phoneNumber,
                         lastName: "",
                         email: "",
                         profileUrl: this.profileUrl[0].url,
                         phoneNumber: phoneNumber
                       })
-                      this.userService.addUser(user).then(() => {
-                        localStorage.setItem("user", JSON.stringify(user));
+                      this.userService.addUser(user).then(async () => {
+                        await this.storageService.setName(KeyType.User, JSON.stringify(user));
                       })
-                    }else{
-                      localStorage.setItem("user", JSON.stringify(getUser));
+                    } else {
+                      await this.storageService.setName(KeyType.User, JSON.stringify(getUser));
                     }
                   })
                 })
