@@ -161,7 +161,8 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  getGroups() {
+  async getGroups() {
+    await this.loadService.showLoading("Mesajlarınız yükleniyor..");
     this.groupService.getGroups(this.currentUser.phoneNumber).subscribe(groups => {
       groups.forEach(group => {
         this.chatService.getChatsByGroupId(group.id).subscribe(messages => {
@@ -184,6 +185,9 @@ export class HomePage implements OnInit {
         })
 
       })
+      setTimeout(async () => {
+        await this.loadService.closeLoading();
+      }, 0);
     })
   }
 
