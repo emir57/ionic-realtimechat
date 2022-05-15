@@ -7,3 +7,7 @@ export class StorageService {
 
   constructor() { }
 }
+
+export enum KeyType {
+  User = "user"
+}
