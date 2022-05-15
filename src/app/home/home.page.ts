@@ -13,6 +13,7 @@ import { ChatService } from '../services/chat.service';
 import { FriendRequestService } from '../services/friend-request.service';
 import { FriendService } from '../services/friend.service';
 import { GroupService } from '../services/group.service';
+import { LoadService } from '../services/load.service';
 import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
@@ -37,7 +38,8 @@ export class HomePage implements OnInit {
     private modalController: ModalController,
     private userService: UserService,
     private friendService: FriendService,
-    private groupService: GroupService
+    private groupService: GroupService,
+    private loadService: LoadService
   ) {
     let messageModel: Message = Object.assign({ uid: "emir", text: "denemee" })
     // chatService.getChats().subscribe(values => {
@@ -138,10 +140,10 @@ export class HomePage implements OnInit {
               const c = value.phone[i];
               phoneNumber += c == " " ? "" : c;
             }
-            if(this.currentUser.phoneNumber == phoneNumber){
+            if (this.currentUser.phoneNumber == phoneNumber) {
               this.messageService.showMessage("Kendi numaranızı giremezsiniz.")
             }
-            else{
+            else {
               this.friendRequestService.add(Object.assign(
                 {
                   senderUserPhoneNumber: this.currentUser.phoneNumber,
@@ -172,7 +174,7 @@ export class HomePage implements OnInit {
               }, group));
             })
           }
-          else if (this.currentUser.phoneNumber=== group.user2PhoneNumber) {
+          else if (this.currentUser.phoneNumber === group.user2PhoneNumber) {
             this.userService.getUserByPhone(group.user1PhoneNumber).subscribe(user => {
               this.groups.push(Object.assign({
                 user: user, groupName: `${user.firstName} ${user.lastName}`, lastMessage: lastMsg[0]
@@ -193,10 +195,12 @@ export class HomePage implements OnInit {
   }
 
   async showGroupChatModal(group: GroupModel) {
+    await this.loadService.showLoading();
     const modal = await this.modalController.create({
       component: GroupPage,
       componentProps: { group: group, currentUser: this.currentUser }
     })
+    await this.loadService.closeLoading();
     return await modal.present();
   }
 
