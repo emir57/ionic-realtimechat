@@ -37,7 +37,7 @@
       </div>
 
       <div *ngIf="chat.user.phoneNumber!=currentUser.phoneNumber">
-        <div class="messageBox messageBoxGlobal">
+        <div class="messageBox messageBoxDateSender messageBoxGlobal">
           <div class="username usernameSender text-white">
             <span *ngIf="chat.user.firstName.length>10">{{chat.user.firstName.substring(0,10)}}</span>
             <span *ngIf="!(chat.user.firstName.length>10)">{{chat.user.firstName}}</span>
