@@ -20,7 +20,7 @@
 <ion-menu side="start" menuId="menu">
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title>
+      <ion-title *ngIf="currentUser">
         <img width="40" height="40" style="border-radius: 50%;" [src]="currentUser.profileUrl" alt="">
         &nbsp;
         {{currentUser.firstName}} {{currentUser.lastName}}
