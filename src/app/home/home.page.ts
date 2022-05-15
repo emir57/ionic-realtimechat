@@ -78,8 +78,8 @@ export class HomePage implements OnInit {
         }, {
           text: 'Çık',
           handler: () => {
-            this.authService.signOut().then(() => {
-              localStorage.removeItem("user");
+            this.authService.signOut().then(async () => {
+              await this.storageService.removeName(KeyType.User);
               this.router.navigate(["login"])
               this.messageService.showMessage("Başarıyla çıkış yapıldı");
               setTimeout(() => {
