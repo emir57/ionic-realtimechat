@@ -187,7 +187,7 @@ export class HomePage implements OnInit {
       })
       setTimeout(async () => {
         await this.loadService.closeLoading();
-      }, 0);
+      }, 400);
     })
   }
 
