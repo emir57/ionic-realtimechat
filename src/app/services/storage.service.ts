@@ -19,6 +19,12 @@ export class StorageService {
     const { value } = await Storage.get({ key: keyType });
     return value;
   }
+
+  async removeName(keyType: KeyType) {
+    await Storage.remove({
+      key: keyType
+    });
+  }
 }
 
 export enum KeyType {
