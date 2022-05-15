@@ -63,7 +63,7 @@ export class GroupPage implements OnInit,AfterViewInit {
     await this.loadService.showLoading();
       this.chatService.getChatsByGroupId(this.group.id).subscribe(async chats => {
         this.chats = chats;
-        // this.setScrollPosition();
+        this.setScrollPosition();
         this.isLoad = false;
         await this.loadService.closeLoading();
       })
