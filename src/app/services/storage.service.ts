@@ -14,6 +14,11 @@ export class StorageService {
       value: value
     });
   }
+
+  async checkName(keyType: KeyType) {
+    const { value } = await Storage.get({ key: keyType });
+    return value;
+  }
 }
 
 export enum KeyType {
