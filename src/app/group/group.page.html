@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <div *ngIf="isLoad" class="spinner-border text-primary" role="status">
+      <div *ngIf="isLoad" class="spinner-border text-primary p-0 m-0" role="status">
         <span class="visually-hidden">Yükleniyor...</span>
       </div>
       &nbsp;
@@ -9,9 +9,9 @@
 
       {{group.user.firstName}} {{group.user.lastName}}
     </ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-button (click)="dismiss()">
-        <ion-icon name="close-outline"></ion-icon>
+        <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
