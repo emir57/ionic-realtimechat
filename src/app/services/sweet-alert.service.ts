@@ -13,7 +13,7 @@ export class SweetAlertService {
       position: options.position ?? MessagePosition.Top,
       showConfirmButton: options.showConfirmButton ?? false,
       timer: options.timer ?? 3000,
-      timerProgressBar: true,
+      timerProgressBar: options.timerProgressBar ?? true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -32,7 +32,7 @@ export class SweetAlertService {
       position: options.position ?? MessagePosition.Top,
       showConfirmButton: options.showConfirmButton ?? false,
       timer: options.timer ?? 3000,
-      timerProgressBar: true,
+      timerProgressBar: options.timerProgressBar ?? true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -52,6 +52,7 @@ export class MessageOptions {
   position?: MessagePosition = MessagePosition.Top;
   timer?: number = 1500;
   showConfirmButton?: boolean = false;
+  timerProgressBar?: boolean = true;
 }
 export enum MessagePosition {
   Top = "top-start",

@@ -110,7 +110,7 @@ export class LoginPage implements OnInit {
                 setTimeout(() => {
                   // this.messageService.showMessage("Giriş Başarılı");
                   this.sweetAlertService.showSuccessMessage({
-                    title: "Giriş Başarııl"
+                    title: "Giriş Başarılı"
                   })
                   this.isOk = true;
                   this.router.navigate(["home"])
