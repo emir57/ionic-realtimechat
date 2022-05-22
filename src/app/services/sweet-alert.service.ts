@@ -8,22 +8,40 @@ export class SweetAlertService {
   constructor() { }
 
   showSuccessMessage(options: Partial<MessageOptions>) {
-    Swal.fire({
+    const Toast = Swal.mixin({
+      toast: true,
       position: options.position ?? MessagePosition.Top,
-      icon: 'success',
-      title: options.title,
       showConfirmButton: options.showConfirmButton ?? false,
-      timer: options.timer ?? 1500
+      timer: options.timer ?? 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: options.title
     })
   }
 
   showErrorMessage(options: Partial<MessageOptions>) {
-    Swal.fire({
+    const Toast = Swal.mixin({
+      toast: true,
       position: options.position ?? MessagePosition.Top,
-      icon: 'error',
-      title: options.title,
       showConfirmButton: options.showConfirmButton ?? false,
-      timer: options.timer ?? 1500
+      timer: options.timer ?? 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    Toast.fire({
+      icon: 'error',
+      title: options.title
     })
   }
 
