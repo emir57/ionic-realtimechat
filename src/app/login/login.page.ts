@@ -119,7 +119,9 @@ export class LoginPage implements OnInit {
           })
         })
         .catch((error) => {
-          this.messageService.showMessage(this.messageService.GetErrorMessage(error.code))
+          this.sweetAlertService.showErrorMessage({
+            title: this.messageService.GetErrorMessage(error.code)
+          })
         })
     }
   }
