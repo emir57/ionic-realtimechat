@@ -32,6 +32,11 @@ export class SweetAlertService {
 export class MessageOptions {
   title: string;
   message: string;
+  position?: MessagePosition = MessagePosition.Top;
   timer?: number = 1500;
   showConfirmButton?: boolean = false;
+}
+export enum MessagePosition {
+  Top = "top-start",
+  Bottm = "bottom-start",
 }
