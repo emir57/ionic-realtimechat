@@ -82,8 +82,6 @@ export class LoginPage implements OnInit {
       }
       this.authService.loginWithPhone(phoneNumber)
         .then(async (confirmationResult) => {
-          // var code = window.prompt("please your code");
-          // return confirmationResult.confirm(code);
           var code = await this.GetCode();
           code.subscribe(code => {
             return confirmationResult.confirm(code)
@@ -107,10 +105,9 @@ export class LoginPage implements OnInit {
                     }
                   })
                 })
-
-
                 setTimeout(() => {
                   this.messageService.showMessage("Giriş Başarılı");
+                  this.isOk = true;
                   this.router.navigate(["home"])
                 }, 1300);
               });
