@@ -56,13 +56,16 @@ export class LoginPage implements OnInit {
           localStorage.setItem("user", JSON.stringify(user));
         })
         setTimeout(() => {
-          this.messageService.showMessage("Giriş Başarılı");
+          this.sweetAlertService.showSuccessMessage({
+            title: "Giriş Başarılı"
+          });
           this.router.navigate(["home"])
         }, 1300);
 
       }).catch(error => {
-        let message = this.messageService.GetErrorMessage(error.code);
-        this.messageService.showMessage(message);
+        this.sweetAlertService.showErrorMessage({
+          title: this.messageService.GetErrorMessage(error.code)
+        })
       }).finally(() => {
         setTimeout(() => {
           this.isOk = true;
@@ -108,10 +111,9 @@ export class LoginPage implements OnInit {
                   })
                 })
                 setTimeout(() => {
-                  // this.messageService.showMessage("Giriş Başarılı");
                   this.sweetAlertService.showSuccessMessage({
                     title: "Giriş Başarılı"
-                  })
+                  });
                   this.isOk = true;
                   this.router.navigate(["home"])
                 }, 1300);
