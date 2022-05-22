@@ -62,6 +62,15 @@ export class HomePage implements OnInit {
     this.menuController.open();
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
   async exit() {
     this.menuController.close();
     const alert = await this.alertController.create({
