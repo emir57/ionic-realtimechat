@@ -28,3 +28,10 @@ export class SweetAlertService {
   }
 
 }
+
+export class MessageOptions {
+  title: string;
+  message: string;
+  timer?: number = 1500;
+  showConfirmButton?: boolean = false;
+}
