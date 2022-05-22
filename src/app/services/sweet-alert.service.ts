@@ -17,4 +17,14 @@ export class SweetAlertService {
     })
   }
 
+  showErrorMessage() {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'Your work has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
 }
