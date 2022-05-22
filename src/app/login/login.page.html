@@ -22,7 +22,7 @@
 
   </div>
   <div id="buttonContainer">
-    <ion-button [disabled]="!isOk" [disabled]="!loginForm.valid" (click)="loginWithPhone()" color="primary" shape="round">
+    <ion-button [disabled]="!isOk" [disabled]="!loginForm.valid" (click)="loginWithPhone()" color="primary">
       <span *ngIf="!isOk" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       &nbsp; <span *ngIf="isOk">Giriş Yap</span>
       &nbsp; <span *ngIf="!isOk">Giriş yapılıyor</span>
