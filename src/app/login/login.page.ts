@@ -117,6 +117,11 @@ export class LoginPage implements OnInit {
                   this.isOk = true;
                   this.router.navigate(["home"])
                 }, 1300);
+              })
+              .catch((error) => {
+                this.sweetAlertService.showErrorMessage({
+                  title: this.messageService.GetErrorMessage(error.code)
+                })
               });
           })
         })
