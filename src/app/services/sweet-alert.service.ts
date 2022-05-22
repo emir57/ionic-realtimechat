@@ -45,6 +45,25 @@ export class SweetAlertService {
     })
   }
 
+  showWarningMessage(options: Partial<MessageOptions>) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: options.position ?? MessagePosition.Top,
+      showConfirmButton: options.showConfirmButton ?? false,
+      timer: options.timer ?? 3000,
+      timerProgressBar: options.timerProgressBar ?? true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    Toast.fire({
+      icon: 'warning',
+      title: options.title
+    })
+  }
+
 }
 
 export class MessageOptions {
