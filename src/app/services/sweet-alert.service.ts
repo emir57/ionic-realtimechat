@@ -9,21 +9,21 @@ export class SweetAlertService {
 
   showSuccessMessage(options: Partial<MessageOptions>) {
     Swal.fire({
-      position: 'top-end',
+      position: options.position ?? MessagePosition.Top,
       icon: 'success',
-      title: 'Your work has been saved',
-      showConfirmButton: false,
-      timer: 1500
+      title: options.title,
+      showConfirmButton: options.showConfirmButton ?? false,
+      timer: options.timer ?? 1500
     })
   }
 
   showErrorMessage(options: Partial<MessageOptions>) {
     Swal.fire({
-      position: 'top-end',
+      position: options.position ?? MessagePosition.Top,
       icon: 'error',
-      title: 'Your work has been saved',
-      showConfirmButton: false,
-      timer: 1500
+      title: options.title,
+      showConfirmButton: options.showConfirmButton ?? false,
+      timer: options.timer ?? 1500
     })
   }
 
@@ -31,12 +31,11 @@ export class SweetAlertService {
 
 export class MessageOptions {
   title: string;
-  message: string;
   position?: MessagePosition = MessagePosition.Top;
   timer?: number = 1500;
   showConfirmButton?: boolean = false;
 }
 export enum MessagePosition {
   Top = "top-start",
-  Bottm = "bottom-start",
+  Bottom = "bottom-start",
 }
