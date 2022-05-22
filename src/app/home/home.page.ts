@@ -87,9 +87,6 @@ export class HomePage implements OnInit {
               await this.storageService.removeName(KeyType.User);
               this.router.navigate(["login"])
               this.messageService.showMessage("Başarıyla çıkış yapıldı");
-              setTimeout(() => {
-                window.location.reload();
-              }, 1000);
             })
           }
         }
