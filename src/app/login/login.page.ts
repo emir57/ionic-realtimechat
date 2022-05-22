@@ -10,6 +10,7 @@ import { UserService } from '../services/user.service';
 import { $ } from "jquery";
 import { ProfileUrls } from '../models/profileUrls';
 import { KeyType, StorageService } from '../services/storage.service';
+import { SweetAlertService } from '../services/sweet-alert.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -29,7 +30,8 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private alertController: AlertController,
     private userService: UserService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private sweetAlertService: SweetAlertService
   ) { }
 
   ngOnInit() {
@@ -106,7 +108,10 @@ export class LoginPage implements OnInit {
                   })
                 })
                 setTimeout(() => {
-                  this.messageService.showMessage("Giriş Başarılı");
+                  // this.messageService.showMessage("Giriş Başarılı");
+                  this.sweetAlertService.showSuccessMessage({
+                    title: "Giriş Başarııl"
+                  })
                   this.isOk = true;
                   this.router.navigate(["home"])
                 }, 1300);
