@@ -7,7 +7,7 @@ export class SweetAlertService {
 
   constructor() { }
 
-  showSuccessMessage() {
+  showSuccessMessage(options: Partial<MessageOptions>) {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
@@ -17,7 +17,7 @@ export class SweetAlertService {
     })
   }
 
-  showErrorMessage() {
+  showErrorMessage(options: Partial<MessageOptions>) {
     Swal.fire({
       position: 'top-end',
       icon: 'error',
