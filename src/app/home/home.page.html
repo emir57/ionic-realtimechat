@@ -8,12 +8,6 @@
         <ion-icon name="menu-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="refresh()">
-        <ion-icon name="refresh-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 
@@ -70,9 +64,9 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="chevron-down-circle-outline"
-      pullingText="Pull to refresh"
+      pullingText="Yenilemek için aşağı kaydır"
       refreshingSpinner="circles"
-      refreshingText="Refreshing...">
+      refreshingText="Yükleniyor...">
     </ion-refresher-content>
   </ion-refresher>
   <ion-item *ngFor="let group of groups" (click)="showGroupChatModal(group)" detail>
