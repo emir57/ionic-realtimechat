@@ -12,20 +12,6 @@
         <ion-label position="floating">Telefon Numarası</ion-label>
         <ion-input type="text" formControlName="phone"></ion-input>
       </ion-item>
-      <!-- <ion-item>
-        <ion-label position="floating">Eposta</ion-label>
-        <ion-input type="email" formControlName="email"></ion-input>
-      </ion-item>
-      <div class="text-danger"
-        *ngIf="(loginForm.get('email').dirty || loginForm.get('email').touched) && loginForm.get('email').errors">
-        <div *ngIf="loginForm.get('email').errors.required">Eposta Gerekli</div>
-        <div *ngIf="loginForm.get('email').errors.maxlength">Eposta 50 karakteri geçemez</div>
-        <div *ngIf="loginForm.get('email').errors.email">Geçersiz eposta</div>
-      </div>
-      <ion-item>
-        <ion-label position="floating">Şifre</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
-      </ion-item> -->
       <div class="text-danger"
         *ngIf="(loginForm.get('password').dirty || loginForm.get('password').touched) && loginForm.get('password').errors">
         <div *ngIf="loginForm.get('password').errors.required">Şifre Gerekli</div>
